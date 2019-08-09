@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class JSPController {
+
+    //just return the result, we can see the json result in web browser. Don't need JSP
     @RequestMapping("/boot/index")
     public String index(Model model){
-       model.addAttribute("msg","Spring boo集成JSP");
        return "index";
     }
 }

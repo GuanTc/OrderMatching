@@ -12,7 +12,7 @@ public class MybatisController {
     private StudentServiceImpl studentService;
     @RequestMapping("/boot/test")
     @ResponseBody
-    public  Object demo(){
+    public Object demo(){
         System.out.println("aa");
         return studentService.findAll();
     }
