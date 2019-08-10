@@ -1,0 +1,7 @@
+[INFO ] 2019-08-10 21:32:35,968 org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+[INFO ] 2019-08-10 21:32:38,411 org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 4256 ms
+[INFO ] 2019-08-10 21:32:39,148 org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+[INFO ] 2019-08-10 21:32:39,218 org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+[INFO ] 2019-08-10 21:32:39,430 org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+[INFO ] 2019-08-10 21:32:47,696 org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+[INFO ] 2019-08-10 21:32:47,705 org.springframework.web.servlet.DispatcherServlet - Completed initialization in 9 ms

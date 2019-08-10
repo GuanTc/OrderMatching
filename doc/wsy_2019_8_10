@@ -1,0 +1,3 @@
+1.所有的方法介绍的放在了接口里面描述
+2.已经集成log4j  但是需要在     log4j2-log.xml配置文件下修改该属性，换成本地的log日志目录   <property name="FILE_PATH" value="F:\log4j" />
+3.完成了简单的增删查

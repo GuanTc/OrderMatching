@@ -1,0 +1,4 @@
+[DEBUG][2019-08-10 21:51:23][PropertySourcesPropertyResolver.java:115] - Found key 'spring.liveBeansView.mbeanDomain' in PropertySource 'systemProperties' with value of type String
+[INFO ][2019-08-10 21:51:23][DirectJDKLog.java:173] - Starting ProtocolHandler ["http-nio-8080"]
+[INFO ][2019-08-10 21:51:23][TomcatWebServer.java:202] - Tomcat started on port(s): 8080 (http) with context path ''
+[INFO ][2019-08-10 21:51:23][StartupInfoLogger.java:59] - Started DemoApplication in 6.94 seconds (JVM running for 13.859)
