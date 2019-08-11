@@ -1,16 +1,16 @@
-package com.demo.BuyOrderBook.pojo;
+package com.demo.SellOrderBook.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuyOrderBookExample {
+public class SellOrderBookExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public BuyOrderBookExample() {
+    public SellOrderBookExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,63 +104,63 @@ public class BuyOrderBookExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andBobIdIsNull() {
-            addCriterion("bob_id is null");
+        public Criteria andSobIdIsNull() {
+            addCriterion("sob_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdIsNotNull() {
-            addCriterion("bob_id is not null");
+        public Criteria andSobIdIsNotNull() {
+            addCriterion("sob_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdEqualTo(Long value) {
-            addCriterion("bob_id =", value, "bobId");
+        public Criteria andSobIdEqualTo(Long value) {
+            addCriterion("sob_id =", value, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdNotEqualTo(Long value) {
-            addCriterion("bob_id <>", value, "bobId");
+        public Criteria andSobIdNotEqualTo(Long value) {
+            addCriterion("sob_id <>", value, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdGreaterThan(Long value) {
-            addCriterion("bob_id >", value, "bobId");
+        public Criteria andSobIdGreaterThan(Long value) {
+            addCriterion("sob_id >", value, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("bob_id >=", value, "bobId");
+        public Criteria andSobIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("sob_id >=", value, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdLessThan(Long value) {
-            addCriterion("bob_id <", value, "bobId");
+        public Criteria andSobIdLessThan(Long value) {
+            addCriterion("sob_id <", value, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdLessThanOrEqualTo(Long value) {
-            addCriterion("bob_id <=", value, "bobId");
+        public Criteria andSobIdLessThanOrEqualTo(Long value) {
+            addCriterion("sob_id <=", value, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdIn(List<Long> values) {
-            addCriterion("bob_id in", values, "bobId");
+        public Criteria andSobIdIn(List<Long> values) {
+            addCriterion("sob_id in", values, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdNotIn(List<Long> values) {
-            addCriterion("bob_id not in", values, "bobId");
+        public Criteria andSobIdNotIn(List<Long> values) {
+            addCriterion("sob_id not in", values, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdBetween(Long value1, Long value2) {
-            addCriterion("bob_id between", value1, value2, "bobId");
+        public Criteria andSobIdBetween(Long value1, Long value2) {
+            addCriterion("sob_id between", value1, value2, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdNotBetween(Long value1, Long value2) {
-            addCriterion("bob_id not between", value1, value2, "bobId");
+        public Criteria andSobIdNotBetween(Long value1, Long value2) {
+            addCriterion("sob_id not between", value1, value2, "sobId");
             return (Criteria) this;
         }
 
@@ -224,123 +224,123 @@ public class BuyOrderBookExample {
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeIsNull() {
-            addCriterion("buy_size is null");
+        public Criteria andAskSizeIsNull() {
+            addCriterion("ask_size is null");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeIsNotNull() {
-            addCriterion("buy_size is not null");
+        public Criteria andAskSizeIsNotNull() {
+            addCriterion("ask_size is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeEqualTo(Integer value) {
-            addCriterion("buy_size =", value, "buySize");
+        public Criteria andAskSizeEqualTo(Integer value) {
+            addCriterion("ask_size =", value, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeNotEqualTo(Integer value) {
-            addCriterion("buy_size <>", value, "buySize");
+        public Criteria andAskSizeNotEqualTo(Integer value) {
+            addCriterion("ask_size <>", value, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeGreaterThan(Integer value) {
-            addCriterion("buy_size >", value, "buySize");
+        public Criteria andAskSizeGreaterThan(Integer value) {
+            addCriterion("ask_size >", value, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("buy_size >=", value, "buySize");
+        public Criteria andAskSizeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("ask_size >=", value, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeLessThan(Integer value) {
-            addCriterion("buy_size <", value, "buySize");
+        public Criteria andAskSizeLessThan(Integer value) {
+            addCriterion("ask_size <", value, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeLessThanOrEqualTo(Integer value) {
-            addCriterion("buy_size <=", value, "buySize");
+        public Criteria andAskSizeLessThanOrEqualTo(Integer value) {
+            addCriterion("ask_size <=", value, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeIn(List<Integer> values) {
-            addCriterion("buy_size in", values, "buySize");
+        public Criteria andAskSizeIn(List<Integer> values) {
+            addCriterion("ask_size in", values, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeNotIn(List<Integer> values) {
-            addCriterion("buy_size not in", values, "buySize");
+        public Criteria andAskSizeNotIn(List<Integer> values) {
+            addCriterion("ask_size not in", values, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeBetween(Integer value1, Integer value2) {
-            addCriterion("buy_size between", value1, value2, "buySize");
+        public Criteria andAskSizeBetween(Integer value1, Integer value2) {
+            addCriterion("ask_size between", value1, value2, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeNotBetween(Integer value1, Integer value2) {
-            addCriterion("buy_size not between", value1, value2, "buySize");
+        public Criteria andAskSizeNotBetween(Integer value1, Integer value2) {
+            addCriterion("ask_size not between", value1, value2, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceIsNull() {
-            addCriterion("buy_price is null");
+        public Criteria andAskPriceIsNull() {
+            addCriterion("ask_price is null");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceIsNotNull() {
-            addCriterion("buy_price is not null");
+        public Criteria andAskPriceIsNotNull() {
+            addCriterion("ask_price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceEqualTo(Float value) {
-            addCriterion("buy_price =", value, "buyPrice");
+        public Criteria andAskPriceEqualTo(Float value) {
+            addCriterion("ask_price =", value, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceNotEqualTo(Float value) {
-            addCriterion("buy_price <>", value, "buyPrice");
+        public Criteria andAskPriceNotEqualTo(Float value) {
+            addCriterion("ask_price <>", value, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceGreaterThan(Float value) {
-            addCriterion("buy_price >", value, "buyPrice");
+        public Criteria andAskPriceGreaterThan(Float value) {
+            addCriterion("ask_price >", value, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceGreaterThanOrEqualTo(Float value) {
-            addCriterion("buy_price >=", value, "buyPrice");
+        public Criteria andAskPriceGreaterThanOrEqualTo(Float value) {
+            addCriterion("ask_price >=", value, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceLessThan(Float value) {
-            addCriterion("buy_price <", value, "buyPrice");
+        public Criteria andAskPriceLessThan(Float value) {
+            addCriterion("ask_price <", value, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceLessThanOrEqualTo(Float value) {
-            addCriterion("buy_price <=", value, "buyPrice");
+        public Criteria andAskPriceLessThanOrEqualTo(Float value) {
+            addCriterion("ask_price <=", value, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceIn(List<Float> values) {
-            addCriterion("buy_price in", values, "buyPrice");
+        public Criteria andAskPriceIn(List<Float> values) {
+            addCriterion("ask_price in", values, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceNotIn(List<Float> values) {
-            addCriterion("buy_price not in", values, "buyPrice");
+        public Criteria andAskPriceNotIn(List<Float> values) {
+            addCriterion("ask_price not in", values, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceBetween(Float value1, Float value2) {
-            addCriterion("buy_price between", value1, value2, "buyPrice");
+        public Criteria andAskPriceBetween(Float value1, Float value2) {
+            addCriterion("ask_price between", value1, value2, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceNotBetween(Float value1, Float value2) {
-            addCriterion("buy_price not between", value1, value2, "buyPrice");
+        public Criteria andAskPriceNotBetween(Float value1, Float value2) {
+            addCriterion("ask_price not between", value1, value2, "askPrice");
             return (Criteria) this;
         }
     }

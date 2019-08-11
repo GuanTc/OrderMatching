@@ -3,6 +3,8 @@ package com.demo.BuyOrderBook.pojo;
 public class BuyOrderBook {
     private Long bobId;
 
+    private Long stockId;
+
     private Integer buySize;
 
     private Float buyPrice;
@@ -13,6 +15,14 @@ public class BuyOrderBook {
 
     public void setBobId(Long bobId) {
         this.bobId = bobId;
+    }
+
+    public Long getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(Long stockId) {
+        this.stockId = stockId;
     }
 
     public Integer getBuySize() {
@@ -29,14 +39,5 @@ public class BuyOrderBook {
 
     public void setBuyPrice(Float buyPrice) {
         this.buyPrice = buyPrice;
-    }
-
-    @Override
-    public String toString() {
-        return "BuyOrderBook{" +
-                "bobId=" + bobId +
-                ", buySize=" + buySize +
-                ", buyPrice=" + buyPrice +
-                '}';
     }
 }

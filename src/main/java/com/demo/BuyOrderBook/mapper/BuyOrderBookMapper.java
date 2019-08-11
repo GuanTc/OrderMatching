@@ -9,8 +9,6 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface BuyOrderBookMapper {
-
-
     int countByExample(BuyOrderBookExample example);
 
     int deleteByExample(BuyOrderBookExample example);
@@ -32,8 +30,4 @@ public interface BuyOrderBookMapper {
     int updateByPrimaryKeySelective(BuyOrderBook record);
 
     int updateByPrimaryKey(BuyOrderBook record);
-
-    BuyOrderBook findTheFirstBuyOrderBook();
-
-    List<BuyOrderBook> findAll();
 }

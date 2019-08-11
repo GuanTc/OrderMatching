@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.demo.BuyOrderBook.mapper.BuyOrderBookMapper" >
-  <resultMap id="BaseResultMap" type="com.demo.BuyOrderBook.pojo.BuyOrderBook" >
-    <id column="bob_id" property="bobId" jdbcType="BIGINT" />
-    <result column="stock_id" property="stockId" jdbcType="BIGINT" />
-    <result column="buy_size" property="buySize" jdbcType="INTEGER" />
-    <result column="buy_price" property="buyPrice" jdbcType="REAL" />
+<mapper namespace="com.demo.user.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.demo.user.pojo.User" >
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,15 +66,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    bob_id, stock_id, buy_size, buy_price
+    user_id, username, password, name
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBookExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.demo.user.pojo.UserExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from buy_order_book
+    from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,76 +85,76 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from buy_order_book
-    where bob_id = #{bobId,jdbcType=BIGINT}
+    from user
+    where user_id = #{userId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from buy_order_book
-    where bob_id = #{bobId,jdbcType=BIGINT}
+    delete from user
+    where user_id = #{userId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBookExample" >
-    delete from buy_order_book
+  <delete id="deleteByExample" parameterType="com.demo.user.pojo.UserExample" >
+    delete from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBook" >
-    insert into buy_order_book (bob_id, stock_id, buy_size, 
-      buy_price)
-    values (#{bobId,jdbcType=BIGINT}, #{stockId,jdbcType=BIGINT}, #{buySize,jdbcType=INTEGER}, 
-      #{buyPrice,jdbcType=REAL})
+  <insert id="insert" parameterType="com.demo.user.pojo.User" >
+    insert into user (user_id, username, password, 
+      name)
+    values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBook" >
-    insert into buy_order_book
+  <insert id="insertSelective" parameterType="com.demo.user.pojo.User" >
+    insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="bobId != null" >
-        bob_id,
+      <if test="userId != null" >
+        user_id,
       </if>
-      <if test="stockId != null" >
-        stock_id,
+      <if test="username != null" >
+        username,
       </if>
-      <if test="buySize != null" >
-        buy_size,
+      <if test="password != null" >
+        password,
       </if>
-      <if test="buyPrice != null" >
-        buy_price,
+      <if test="name != null" >
+        name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="bobId != null" >
-        #{bobId,jdbcType=BIGINT},
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
       </if>
-      <if test="stockId != null" >
-        #{stockId,jdbcType=BIGINT},
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
       </if>
-      <if test="buySize != null" >
-        #{buySize,jdbcType=INTEGER},
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
       </if>
-      <if test="buyPrice != null" >
-        #{buyPrice,jdbcType=REAL},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBookExample" resultType="java.lang.Integer" >
-    select count(*) from buy_order_book
+  <select id="countByExample" parameterType="com.demo.user.pojo.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update buy_order_book
+    update user
     <set >
-      <if test="record.bobId != null" >
-        bob_id = #{record.bobId,jdbcType=BIGINT},
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
       </if>
-      <if test="record.stockId != null" >
-        stock_id = #{record.stockId,jdbcType=BIGINT},
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.buySize != null" >
-        buy_size = #{record.buySize,jdbcType=INTEGER},
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.buyPrice != null" >
-        buy_price = #{record.buyPrice,jdbcType=REAL},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -162,35 +162,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update buy_order_book
-    set bob_id = #{record.bobId,jdbcType=BIGINT},
-      stock_id = #{record.stockId,jdbcType=BIGINT},
-      buy_size = #{record.buySize,jdbcType=INTEGER},
-      buy_price = #{record.buyPrice,jdbcType=REAL}
+    update user
+    set user_id = #{record.userId,jdbcType=BIGINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBook" >
-    update buy_order_book
+  <update id="updateByPrimaryKeySelective" parameterType="com.demo.user.pojo.User" >
+    update user
     <set >
-      <if test="stockId != null" >
-        stock_id = #{stockId,jdbcType=BIGINT},
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="buySize != null" >
-        buy_size = #{buySize,jdbcType=INTEGER},
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="buyPrice != null" >
-        buy_price = #{buyPrice,jdbcType=REAL},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
     </set>
-    where bob_id = #{bobId,jdbcType=BIGINT}
+    where user_id = #{userId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBook" >
-    update buy_order_book
-    set stock_id = #{stockId,jdbcType=BIGINT},
-      buy_size = #{buySize,jdbcType=INTEGER},
-      buy_price = #{buyPrice,jdbcType=REAL}
-    where bob_id = #{bobId,jdbcType=BIGINT}
+  <update id="updateByPrimaryKey" parameterType="com.demo.user.pojo.User" >
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
   </update>
 </mapper>

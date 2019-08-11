@@ -1,16 +1,16 @@
-package com.demo.BuyOrderBook.pojo;
+package com.demo.stock.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuyOrderBookExample {
+public class StockExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public BuyOrderBookExample() {
+    public StockExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,183 +104,203 @@ public class BuyOrderBookExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andBobIdIsNull() {
-            addCriterion("bob_id is null");
+        public Criteria andStockIdIsNull() {
+            addCriterion("stock_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdIsNotNull() {
-            addCriterion("bob_id is not null");
+        public Criteria andStockIdIsNotNull() {
+            addCriterion("stock_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdEqualTo(Long value) {
-            addCriterion("bob_id =", value, "bobId");
+        public Criteria andStockIdEqualTo(Long value) {
+            addCriterion("stock_id =", value, "stockId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdNotEqualTo(Long value) {
-            addCriterion("bob_id <>", value, "bobId");
+        public Criteria andStockIdNotEqualTo(Long value) {
+            addCriterion("stock_id <>", value, "stockId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdGreaterThan(Long value) {
-            addCriterion("bob_id >", value, "bobId");
+        public Criteria andStockIdGreaterThan(Long value) {
+            addCriterion("stock_id >", value, "stockId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("bob_id >=", value, "bobId");
+        public Criteria andStockIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("stock_id >=", value, "stockId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdLessThan(Long value) {
-            addCriterion("bob_id <", value, "bobId");
+        public Criteria andStockIdLessThan(Long value) {
+            addCriterion("stock_id <", value, "stockId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdLessThanOrEqualTo(Long value) {
-            addCriterion("bob_id <=", value, "bobId");
+        public Criteria andStockIdLessThanOrEqualTo(Long value) {
+            addCriterion("stock_id <=", value, "stockId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdIn(List<Long> values) {
-            addCriterion("bob_id in", values, "bobId");
+        public Criteria andStockIdIn(List<Long> values) {
+            addCriterion("stock_id in", values, "stockId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdNotIn(List<Long> values) {
-            addCriterion("bob_id not in", values, "bobId");
+        public Criteria andStockIdNotIn(List<Long> values) {
+            addCriterion("stock_id not in", values, "stockId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdBetween(Long value1, Long value2) {
-            addCriterion("bob_id between", value1, value2, "bobId");
+        public Criteria andStockIdBetween(Long value1, Long value2) {
+            addCriterion("stock_id between", value1, value2, "stockId");
             return (Criteria) this;
         }
 
-        public Criteria andBobIdNotBetween(Long value1, Long value2) {
-            addCriterion("bob_id not between", value1, value2, "bobId");
+        public Criteria andStockIdNotBetween(Long value1, Long value2) {
+            addCriterion("stock_id not between", value1, value2, "stockId");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeIsNull() {
-            addCriterion("buy_size is null");
+        public Criteria andStockCodeIsNull() {
+            addCriterion("stock_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeIsNotNull() {
-            addCriterion("buy_size is not null");
+        public Criteria andStockCodeIsNotNull() {
+            addCriterion("stock_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeEqualTo(Integer value) {
-            addCriterion("buy_size =", value, "buySize");
+        public Criteria andStockCodeEqualTo(String value) {
+            addCriterion("stock_code =", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeNotEqualTo(Integer value) {
-            addCriterion("buy_size <>", value, "buySize");
+        public Criteria andStockCodeNotEqualTo(String value) {
+            addCriterion("stock_code <>", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeGreaterThan(Integer value) {
-            addCriterion("buy_size >", value, "buySize");
+        public Criteria andStockCodeGreaterThan(String value) {
+            addCriterion("stock_code >", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("buy_size >=", value, "buySize");
+        public Criteria andStockCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("stock_code >=", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeLessThan(Integer value) {
-            addCriterion("buy_size <", value, "buySize");
+        public Criteria andStockCodeLessThan(String value) {
+            addCriterion("stock_code <", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeLessThanOrEqualTo(Integer value) {
-            addCriterion("buy_size <=", value, "buySize");
+        public Criteria andStockCodeLessThanOrEqualTo(String value) {
+            addCriterion("stock_code <=", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeIn(List<Integer> values) {
-            addCriterion("buy_size in", values, "buySize");
+        public Criteria andStockCodeLike(String value) {
+            addCriterion("stock_code like", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeNotIn(List<Integer> values) {
-            addCriterion("buy_size not in", values, "buySize");
+        public Criteria andStockCodeNotLike(String value) {
+            addCriterion("stock_code not like", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeBetween(Integer value1, Integer value2) {
-            addCriterion("buy_size between", value1, value2, "buySize");
+        public Criteria andStockCodeIn(List<String> values) {
+            addCriterion("stock_code in", values, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuySizeNotBetween(Integer value1, Integer value2) {
-            addCriterion("buy_size not between", value1, value2, "buySize");
+        public Criteria andStockCodeNotIn(List<String> values) {
+            addCriterion("stock_code not in", values, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceIsNull() {
-            addCriterion("buy_price is null");
+        public Criteria andStockCodeBetween(String value1, String value2) {
+            addCriterion("stock_code between", value1, value2, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceIsNotNull() {
-            addCriterion("buy_price is not null");
+        public Criteria andStockCodeNotBetween(String value1, String value2) {
+            addCriterion("stock_code not between", value1, value2, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceEqualTo(Float value) {
-            addCriterion("buy_price =", value, "buyPrice");
+        public Criteria andStockNameIsNull() {
+            addCriterion("stock_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceNotEqualTo(Float value) {
-            addCriterion("buy_price <>", value, "buyPrice");
+        public Criteria andStockNameIsNotNull() {
+            addCriterion("stock_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceGreaterThan(Float value) {
-            addCriterion("buy_price >", value, "buyPrice");
+        public Criteria andStockNameEqualTo(String value) {
+            addCriterion("stock_name =", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceGreaterThanOrEqualTo(Float value) {
-            addCriterion("buy_price >=", value, "buyPrice");
+        public Criteria andStockNameNotEqualTo(String value) {
+            addCriterion("stock_name <>", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceLessThan(Float value) {
-            addCriterion("buy_price <", value, "buyPrice");
+        public Criteria andStockNameGreaterThan(String value) {
+            addCriterion("stock_name >", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceLessThanOrEqualTo(Float value) {
-            addCriterion("buy_price <=", value, "buyPrice");
+        public Criteria andStockNameGreaterThanOrEqualTo(String value) {
+            addCriterion("stock_name >=", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceIn(List<Float> values) {
-            addCriterion("buy_price in", values, "buyPrice");
+        public Criteria andStockNameLessThan(String value) {
+            addCriterion("stock_name <", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceNotIn(List<Float> values) {
-            addCriterion("buy_price not in", values, "buyPrice");
+        public Criteria andStockNameLessThanOrEqualTo(String value) {
+            addCriterion("stock_name <=", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceBetween(Float value1, Float value2) {
-            addCriterion("buy_price between", value1, value2, "buyPrice");
+        public Criteria andStockNameLike(String value) {
+            addCriterion("stock_name like", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andBuyPriceNotBetween(Float value1, Float value2) {
-            addCriterion("buy_price not between", value1, value2, "buyPrice");
+        public Criteria andStockNameNotLike(String value) {
+            addCriterion("stock_name not like", value, "stockName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockNameIn(List<String> values) {
+            addCriterion("stock_name in", values, "stockName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockNameNotIn(List<String> values) {
+            addCriterion("stock_name not in", values, "stockName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockNameBetween(String value1, String value2) {
+            addCriterion("stock_name between", value1, value2, "stockName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockNameNotBetween(String value1, String value2) {
+            addCriterion("stock_name not between", value1, value2, "stockName");
             return (Criteria) this;
         }
     }

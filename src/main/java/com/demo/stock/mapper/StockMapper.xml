@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.demo.BuyOrderBook.mapper.BuyOrderBookMapper" >
-  <resultMap id="BaseResultMap" type="com.demo.BuyOrderBook.pojo.BuyOrderBook" >
-    <id column="bob_id" property="bobId" jdbcType="BIGINT" />
-    <result column="buy_size" property="buySize" jdbcType="INTEGER" />
-    <result column="buy_price" property="buyPrice" jdbcType="REAL" />
+<mapper namespace="com.demo.stock.mapper.StockMapper" >
+  <resultMap id="BaseResultMap" type="com.demo.stock.pojo.Stock" >
+    <id column="stock_id" property="stockId" jdbcType="BIGINT" />
+    <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
+    <result column="stock_name" property="stockName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    bob_id, buy_size, buy_price
+    stock_id, stock_code, stock_name
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBookExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.demo.stock.pojo.StockExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from buy_order_book
+    from stock
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,67 +84,67 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from buy_order_book
-    where bob_id = #{bobId,jdbcType=BIGINT}
+    from stock
+    where stock_id = #{stockId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from buy_order_book
-    where bob_id = #{bobId,jdbcType=BIGINT}
+    delete from stock
+    where stock_id = #{stockId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBookExample" >
-    delete from buy_order_book
+  <delete id="deleteByExample" parameterType="com.demo.stock.pojo.StockExample" >
+    delete from stock
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBook" >
-    insert into buy_order_book (bob_id, buy_size, buy_price
+  <insert id="insert" parameterType="com.demo.stock.pojo.Stock" >
+    insert into stock (stock_id, stock_code, stock_name
       )
-    values (#{bobId,jdbcType=BIGINT}, #{buySize,jdbcType=INTEGER}, #{buyPrice,jdbcType=REAL}
+    values (#{stockId,jdbcType=BIGINT}, #{stockCode,jdbcType=VARCHAR}, #{stockName,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBook" >
-    insert into buy_order_book
+  <insert id="insertSelective" parameterType="com.demo.stock.pojo.Stock" >
+    insert into stock
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="bobId != null" >
-        bob_id,
+      <if test="stockId != null" >
+        stock_id,
       </if>
-      <if test="buySize != null" >
-        buy_size,
+      <if test="stockCode != null" >
+        stock_code,
       </if>
-      <if test="buyPrice != null" >
-        buy_price,
+      <if test="stockName != null" >
+        stock_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="bobId != null" >
-        #{bobId,jdbcType=BIGINT},
+      <if test="stockId != null" >
+        #{stockId,jdbcType=BIGINT},
       </if>
-      <if test="buySize != null" >
-        #{buySize,jdbcType=INTEGER},
+      <if test="stockCode != null" >
+        #{stockCode,jdbcType=VARCHAR},
       </if>
-      <if test="buyPrice != null" >
-        #{buyPrice,jdbcType=REAL},
+      <if test="stockName != null" >
+        #{stockName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBookExample" resultType="java.lang.Integer" >
-    select count(*) from buy_order_book
+  <select id="countByExample" parameterType="com.demo.stock.pojo.StockExample" resultType="java.lang.Integer" >
+    select count(*) from stock
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update buy_order_book
+    update stock
     <set >
-      <if test="record.bobId != null" >
-        bob_id = #{record.bobId,jdbcType=BIGINT},
+      <if test="record.stockId != null" >
+        stock_id = #{record.stockId,jdbcType=BIGINT},
       </if>
-      <if test="record.buySize != null" >
-        buy_size = #{record.buySize,jdbcType=INTEGER},
+      <if test="record.stockCode != null" >
+        stock_code = #{record.stockCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.buyPrice != null" >
-        buy_price = #{record.buyPrice,jdbcType=REAL},
+      <if test="record.stockName != null" >
+        stock_name = #{record.stockName,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -152,30 +152,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update buy_order_book
-    set bob_id = #{record.bobId,jdbcType=BIGINT},
-      buy_size = #{record.buySize,jdbcType=INTEGER},
-      buy_price = #{record.buyPrice,jdbcType=REAL}
+    update stock
+    set stock_id = #{record.stockId,jdbcType=BIGINT},
+      stock_code = #{record.stockCode,jdbcType=VARCHAR},
+      stock_name = #{record.stockName,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBook" >
-    update buy_order_book
+  <update id="updateByPrimaryKeySelective" parameterType="com.demo.stock.pojo.Stock" >
+    update stock
     <set >
-      <if test="buySize != null" >
-        buy_size = #{buySize,jdbcType=INTEGER},
+      <if test="stockCode != null" >
+        stock_code = #{stockCode,jdbcType=VARCHAR},
       </if>
-      <if test="buyPrice != null" >
-        buy_price = #{buyPrice,jdbcType=REAL},
+      <if test="stockName != null" >
+        stock_name = #{stockName,jdbcType=VARCHAR},
       </if>
     </set>
-    where bob_id = #{bobId,jdbcType=BIGINT}
+    where stock_id = #{stockId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.demo.BuyOrderBook.pojo.BuyOrderBook" >
-    update buy_order_book
-    set buy_size = #{buySize,jdbcType=INTEGER},
-      buy_price = #{buyPrice,jdbcType=REAL}
-    where bob_id = #{bobId,jdbcType=BIGINT}
+  <update id="updateByPrimaryKey" parameterType="com.demo.stock.pojo.Stock" >
+    update stock
+    set stock_code = #{stockCode,jdbcType=VARCHAR},
+      stock_name = #{stockName,jdbcType=VARCHAR}
+    where stock_id = #{stockId,jdbcType=BIGINT}
   </update>
 </mapper>
