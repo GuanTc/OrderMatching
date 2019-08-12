@@ -8,13 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>xxxxx</title>
-    <div>
-
-     ${msg}
-    </div>
 </head>
 <body>
-ffffff
+<form id="register" action="${pageContext.request.contextPath }/user/update" method="post">
+    <input type="text" placeholder="userId" name="userId" />
+    <input type="text" placeholder="username" name="username" />
+    <input type="text" placeholder="password" name="password" />
+    <input type="text" placeholder="name" name="name" />
+    <button type="submit" value="确认修改" name="确认修改">确认修改</button>
+</form>
+
+
+
+index
 </body>
 </html>
