@@ -3,10 +3,8 @@ package com.demo.stock.mapper;
 import com.demo.stock.pojo.Stock;
 import com.demo.stock.pojo.StockExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface StockMapper {
     int countByExample(StockExample example);
 
