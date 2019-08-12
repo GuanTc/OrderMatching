@@ -9,8 +9,14 @@ public class test1 {
     @Async
     public void out1(){
         Trade t1=new Trade();
-        while(true)
-            System.out.println("t1 pull value:" + t1.pollout());
+        while(true){
+            String s1=t1.pollout();
+            if(s1!=null){
+                System.out.println("t1 pull value:" + s1);
+            }
+
+        }
+
     }
 
 }
