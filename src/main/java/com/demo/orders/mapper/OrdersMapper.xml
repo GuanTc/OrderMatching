@@ -8,8 +8,20 @@
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="REAL" />
     <result column="qty" property="qty" jdbcType="INTEGER" />
+    <result column="remain_qty" property="remainQty" jdbcType="INTEGER" />
     <result column="order_type" property="orderType" jdbcType="VARCHAR" />
+    <result column="market_price" property="marketPrice" jdbcType="REAL" />
+    <result column="limit_price" property="limitPrice" jdbcType="REAL" />
+    <result column="trigger_price" property="triggerPrice" jdbcType="REAL" />
+    <result column="stop_price" property="stopPrice" jdbcType="REAL" />
+    <result column="full_or_kill" property="fullOrKill" jdbcType="INTEGER" />
+    <result column="duration" property="duration" jdbcType="VARCHAR" />
+    <result column="gtd_date" property="gtdDate" jdbcType="DATE" />
+    <result column="minute" property="minute" jdbcType="INTEGER" />
     <result column="submit_date" property="submitDate" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="send_out_date" property="sendOutDate" jdbcType="DATE" />
+    <result column="final_date" property="finalDate" jdbcType="DATE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +82,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    order_id, user_id, stock_id, type, price, qty, order_type, submit_date
+    order_id, user_id, stock_id, type, price, qty, remain_qty, order_type, market_price, 
+    limit_price, trigger_price, stop_price, full_or_kill, duration, gtd_date, minute, 
+    submit_date, status, send_out_date, final_date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.demo.orders.pojo.OrdersExample" >
     select
@@ -104,11 +118,19 @@
   </delete>
   <insert id="insert" parameterType="com.demo.orders.pojo.Orders" >
     insert into orders (order_id, user_id, stock_id, 
-      type, price, qty, order_type, 
-      submit_date)
+      type, price, qty, remain_qty, 
+      order_type, market_price, limit_price, 
+      trigger_price, stop_price, full_or_kill, 
+      duration, gtd_date, minute, 
+      submit_date, status, send_out_date, 
+      final_date)
     values (#{orderId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{stockId,jdbcType=BIGINT}, 
-      #{type,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, #{qty,jdbcType=INTEGER}, #{orderType,jdbcType=VARCHAR}, 
-      #{submitDate,jdbcType=DATE})
+      #{type,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, #{qty,jdbcType=INTEGER}, #{remainQty,jdbcType=INTEGER}, 
+      #{orderType,jdbcType=VARCHAR}, #{marketPrice,jdbcType=REAL}, #{limitPrice,jdbcType=REAL}, 
+      #{triggerPrice,jdbcType=REAL}, #{stopPrice,jdbcType=REAL}, #{fullOrKill,jdbcType=INTEGER}, 
+      #{duration,jdbcType=VARCHAR}, #{gtdDate,jdbcType=DATE}, #{minute,jdbcType=INTEGER}, 
+      #{submitDate,jdbcType=DATE}, #{status,jdbcType=INTEGER}, #{sendOutDate,jdbcType=DATE}, 
+      #{finalDate,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.demo.orders.pojo.Orders" >
     insert into orders
@@ -131,11 +153,47 @@
       <if test="qty != null" >
         qty,
       </if>
+      <if test="remainQty != null" >
+        remain_qty,
+      </if>
       <if test="orderType != null" >
         order_type,
       </if>
+      <if test="marketPrice != null" >
+        market_price,
+      </if>
+      <if test="limitPrice != null" >
+        limit_price,
+      </if>
+      <if test="triggerPrice != null" >
+        trigger_price,
+      </if>
+      <if test="stopPrice != null" >
+        stop_price,
+      </if>
+      <if test="fullOrKill != null" >
+        full_or_kill,
+      </if>
+      <if test="duration != null" >
+        duration,
+      </if>
+      <if test="gtdDate != null" >
+        gtd_date,
+      </if>
+      <if test="minute != null" >
+        minute,
+      </if>
       <if test="submitDate != null" >
         submit_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="sendOutDate != null" >
+        send_out_date,
+      </if>
+      <if test="finalDate != null" >
+        final_date,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -157,11 +215,47 @@
       <if test="qty != null" >
         #{qty,jdbcType=INTEGER},
       </if>
+      <if test="remainQty != null" >
+        #{remainQty,jdbcType=INTEGER},
+      </if>
       <if test="orderType != null" >
         #{orderType,jdbcType=VARCHAR},
       </if>
+      <if test="marketPrice != null" >
+        #{marketPrice,jdbcType=REAL},
+      </if>
+      <if test="limitPrice != null" >
+        #{limitPrice,jdbcType=REAL},
+      </if>
+      <if test="triggerPrice != null" >
+        #{triggerPrice,jdbcType=REAL},
+      </if>
+      <if test="stopPrice != null" >
+        #{stopPrice,jdbcType=REAL},
+      </if>
+      <if test="fullOrKill != null" >
+        #{fullOrKill,jdbcType=INTEGER},
+      </if>
+      <if test="duration != null" >
+        #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="gtdDate != null" >
+        #{gtdDate,jdbcType=DATE},
+      </if>
+      <if test="minute != null" >
+        #{minute,jdbcType=INTEGER},
+      </if>
       <if test="submitDate != null" >
         #{submitDate,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sendOutDate != null" >
+        #{sendOutDate,jdbcType=DATE},
+      </if>
+      <if test="finalDate != null" >
+        #{finalDate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -192,11 +286,47 @@
       <if test="record.qty != null" >
         qty = #{record.qty,jdbcType=INTEGER},
       </if>
+      <if test="record.remainQty != null" >
+        remain_qty = #{record.remainQty,jdbcType=INTEGER},
+      </if>
       <if test="record.orderType != null" >
         order_type = #{record.orderType,jdbcType=VARCHAR},
       </if>
+      <if test="record.marketPrice != null" >
+        market_price = #{record.marketPrice,jdbcType=REAL},
+      </if>
+      <if test="record.limitPrice != null" >
+        limit_price = #{record.limitPrice,jdbcType=REAL},
+      </if>
+      <if test="record.triggerPrice != null" >
+        trigger_price = #{record.triggerPrice,jdbcType=REAL},
+      </if>
+      <if test="record.stopPrice != null" >
+        stop_price = #{record.stopPrice,jdbcType=REAL},
+      </if>
+      <if test="record.fullOrKill != null" >
+        full_or_kill = #{record.fullOrKill,jdbcType=INTEGER},
+      </if>
+      <if test="record.duration != null" >
+        duration = #{record.duration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gtdDate != null" >
+        gtd_date = #{record.gtdDate,jdbcType=DATE},
+      </if>
+      <if test="record.minute != null" >
+        minute = #{record.minute,jdbcType=INTEGER},
+      </if>
       <if test="record.submitDate != null" >
         submit_date = #{record.submitDate,jdbcType=DATE},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendOutDate != null" >
+        send_out_date = #{record.sendOutDate,jdbcType=DATE},
+      </if>
+      <if test="record.finalDate != null" >
+        final_date = #{record.finalDate,jdbcType=DATE},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -211,8 +341,20 @@
       type = #{record.type,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=REAL},
       qty = #{record.qty,jdbcType=INTEGER},
+      remain_qty = #{record.remainQty,jdbcType=INTEGER},
       order_type = #{record.orderType,jdbcType=VARCHAR},
-      submit_date = #{record.submitDate,jdbcType=DATE}
+      market_price = #{record.marketPrice,jdbcType=REAL},
+      limit_price = #{record.limitPrice,jdbcType=REAL},
+      trigger_price = #{record.triggerPrice,jdbcType=REAL},
+      stop_price = #{record.stopPrice,jdbcType=REAL},
+      full_or_kill = #{record.fullOrKill,jdbcType=INTEGER},
+      duration = #{record.duration,jdbcType=VARCHAR},
+      gtd_date = #{record.gtdDate,jdbcType=DATE},
+      minute = #{record.minute,jdbcType=INTEGER},
+      submit_date = #{record.submitDate,jdbcType=DATE},
+      status = #{record.status,jdbcType=INTEGER},
+      send_out_date = #{record.sendOutDate,jdbcType=DATE},
+      final_date = #{record.finalDate,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -235,11 +377,47 @@
       <if test="qty != null" >
         qty = #{qty,jdbcType=INTEGER},
       </if>
+      <if test="remainQty != null" >
+        remain_qty = #{remainQty,jdbcType=INTEGER},
+      </if>
       <if test="orderType != null" >
         order_type = #{orderType,jdbcType=VARCHAR},
       </if>
+      <if test="marketPrice != null" >
+        market_price = #{marketPrice,jdbcType=REAL},
+      </if>
+      <if test="limitPrice != null" >
+        limit_price = #{limitPrice,jdbcType=REAL},
+      </if>
+      <if test="triggerPrice != null" >
+        trigger_price = #{triggerPrice,jdbcType=REAL},
+      </if>
+      <if test="stopPrice != null" >
+        stop_price = #{stopPrice,jdbcType=REAL},
+      </if>
+      <if test="fullOrKill != null" >
+        full_or_kill = #{fullOrKill,jdbcType=INTEGER},
+      </if>
+      <if test="duration != null" >
+        duration = #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="gtdDate != null" >
+        gtd_date = #{gtdDate,jdbcType=DATE},
+      </if>
+      <if test="minute != null" >
+        minute = #{minute,jdbcType=INTEGER},
+      </if>
       <if test="submitDate != null" >
         submit_date = #{submitDate,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sendOutDate != null" >
+        send_out_date = #{sendOutDate,jdbcType=DATE},
+      </if>
+      <if test="finalDate != null" >
+        final_date = #{finalDate,jdbcType=DATE},
       </if>
     </set>
     where order_id = #{orderId,jdbcType=BIGINT}
@@ -251,8 +429,20 @@
       type = #{type,jdbcType=VARCHAR},
       price = #{price,jdbcType=REAL},
       qty = #{qty,jdbcType=INTEGER},
+      remain_qty = #{remainQty,jdbcType=INTEGER},
       order_type = #{orderType,jdbcType=VARCHAR},
-      submit_date = #{submitDate,jdbcType=DATE}
+      market_price = #{marketPrice,jdbcType=REAL},
+      limit_price = #{limitPrice,jdbcType=REAL},
+      trigger_price = #{triggerPrice,jdbcType=REAL},
+      stop_price = #{stopPrice,jdbcType=REAL},
+      full_or_kill = #{fullOrKill,jdbcType=INTEGER},
+      duration = #{duration,jdbcType=VARCHAR},
+      gtd_date = #{gtdDate,jdbcType=DATE},
+      minute = #{minute,jdbcType=INTEGER},
+      submit_date = #{submitDate,jdbcType=DATE},
+      status = #{status,jdbcType=INTEGER},
+      send_out_date = #{sendOutDate,jdbcType=DATE},
+      final_date = #{finalDate,jdbcType=DATE}
     where order_id = #{orderId,jdbcType=BIGINT}
   </update>
 </mapper>
