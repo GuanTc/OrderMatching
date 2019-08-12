@@ -1,17 +1,16 @@
-package com.demo.price.pojo;
+package com.demo.SellOrderBook.pojo;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class PriceExample {
+public class SellOrderBookExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public PriceExample() {
+    public SellOrderBookExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -105,63 +104,63 @@ public class PriceExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andPriceIdIsNull() {
-            addCriterion("price_id is null");
+        public Criteria andSobIdIsNull() {
+            addCriterion("sob_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIdIsNotNull() {
-            addCriterion("price_id is not null");
+        public Criteria andSobIdIsNotNull() {
+            addCriterion("sob_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIdEqualTo(Long value) {
-            addCriterion("price_id =", value, "priceId");
+        public Criteria andSobIdEqualTo(Long value) {
+            addCriterion("sob_id =", value, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIdNotEqualTo(Long value) {
-            addCriterion("price_id <>", value, "priceId");
+        public Criteria andSobIdNotEqualTo(Long value) {
+            addCriterion("sob_id <>", value, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIdGreaterThan(Long value) {
-            addCriterion("price_id >", value, "priceId");
+        public Criteria andSobIdGreaterThan(Long value) {
+            addCriterion("sob_id >", value, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("price_id >=", value, "priceId");
+        public Criteria andSobIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("sob_id >=", value, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIdLessThan(Long value) {
-            addCriterion("price_id <", value, "priceId");
+        public Criteria andSobIdLessThan(Long value) {
+            addCriterion("sob_id <", value, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIdLessThanOrEqualTo(Long value) {
-            addCriterion("price_id <=", value, "priceId");
+        public Criteria andSobIdLessThanOrEqualTo(Long value) {
+            addCriterion("sob_id <=", value, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIdIn(List<Long> values) {
-            addCriterion("price_id in", values, "priceId");
+        public Criteria andSobIdIn(List<Long> values) {
+            addCriterion("sob_id in", values, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIdNotIn(List<Long> values) {
-            addCriterion("price_id not in", values, "priceId");
+        public Criteria andSobIdNotIn(List<Long> values) {
+            addCriterion("sob_id not in", values, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIdBetween(Long value1, Long value2) {
-            addCriterion("price_id between", value1, value2, "priceId");
+        public Criteria andSobIdBetween(Long value1, Long value2) {
+            addCriterion("sob_id between", value1, value2, "sobId");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIdNotBetween(Long value1, Long value2) {
-            addCriterion("price_id not between", value1, value2, "priceId");
+        public Criteria andSobIdNotBetween(Long value1, Long value2) {
+            addCriterion("sob_id not between", value1, value2, "sobId");
             return (Criteria) this;
         }
 
@@ -225,183 +224,183 @@ public class PriceExample {
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceIsNull() {
-            addCriterion("buy_current_price is null");
+        public Criteria andOrderIdIsNull() {
+            addCriterion("order_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceIsNotNull() {
-            addCriterion("buy_current_price is not null");
+        public Criteria andOrderIdIsNotNull() {
+            addCriterion("order_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceEqualTo(Float value) {
-            addCriterion("buy_current_price =", value, "buyCurrentPrice");
+        public Criteria andOrderIdEqualTo(Long value) {
+            addCriterion("order_id =", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceNotEqualTo(Float value) {
-            addCriterion("buy_current_price <>", value, "buyCurrentPrice");
+        public Criteria andOrderIdNotEqualTo(Long value) {
+            addCriterion("order_id <>", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceGreaterThan(Float value) {
-            addCriterion("buy_current_price >", value, "buyCurrentPrice");
+        public Criteria andOrderIdGreaterThan(Long value) {
+            addCriterion("order_id >", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceGreaterThanOrEqualTo(Float value) {
-            addCriterion("buy_current_price >=", value, "buyCurrentPrice");
+        public Criteria andOrderIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("order_id >=", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceLessThan(Float value) {
-            addCriterion("buy_current_price <", value, "buyCurrentPrice");
+        public Criteria andOrderIdLessThan(Long value) {
+            addCriterion("order_id <", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceLessThanOrEqualTo(Float value) {
-            addCriterion("buy_current_price <=", value, "buyCurrentPrice");
+        public Criteria andOrderIdLessThanOrEqualTo(Long value) {
+            addCriterion("order_id <=", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceIn(List<Float> values) {
-            addCriterion("buy_current_price in", values, "buyCurrentPrice");
+        public Criteria andOrderIdIn(List<Long> values) {
+            addCriterion("order_id in", values, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceNotIn(List<Float> values) {
-            addCriterion("buy_current_price not in", values, "buyCurrentPrice");
+        public Criteria andOrderIdNotIn(List<Long> values) {
+            addCriterion("order_id not in", values, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceBetween(Float value1, Float value2) {
-            addCriterion("buy_current_price between", value1, value2, "buyCurrentPrice");
+        public Criteria andOrderIdBetween(Long value1, Long value2) {
+            addCriterion("order_id between", value1, value2, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceNotBetween(Float value1, Float value2) {
-            addCriterion("buy_current_price not between", value1, value2, "buyCurrentPrice");
+        public Criteria andOrderIdNotBetween(Long value1, Long value2) {
+            addCriterion("order_id not between", value1, value2, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceIsNull() {
-            addCriterion("sell_current_price is null");
+        public Criteria andAskSizeIsNull() {
+            addCriterion("ask_size is null");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceIsNotNull() {
-            addCriterion("sell_current_price is not null");
+        public Criteria andAskSizeIsNotNull() {
+            addCriterion("ask_size is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceEqualTo(Float value) {
-            addCriterion("sell_current_price =", value, "sellCurrentPrice");
+        public Criteria andAskSizeEqualTo(Integer value) {
+            addCriterion("ask_size =", value, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceNotEqualTo(Float value) {
-            addCriterion("sell_current_price <>", value, "sellCurrentPrice");
+        public Criteria andAskSizeNotEqualTo(Integer value) {
+            addCriterion("ask_size <>", value, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceGreaterThan(Float value) {
-            addCriterion("sell_current_price >", value, "sellCurrentPrice");
+        public Criteria andAskSizeGreaterThan(Integer value) {
+            addCriterion("ask_size >", value, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceGreaterThanOrEqualTo(Float value) {
-            addCriterion("sell_current_price >=", value, "sellCurrentPrice");
+        public Criteria andAskSizeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("ask_size >=", value, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceLessThan(Float value) {
-            addCriterion("sell_current_price <", value, "sellCurrentPrice");
+        public Criteria andAskSizeLessThan(Integer value) {
+            addCriterion("ask_size <", value, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceLessThanOrEqualTo(Float value) {
-            addCriterion("sell_current_price <=", value, "sellCurrentPrice");
+        public Criteria andAskSizeLessThanOrEqualTo(Integer value) {
+            addCriterion("ask_size <=", value, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceIn(List<Float> values) {
-            addCriterion("sell_current_price in", values, "sellCurrentPrice");
+        public Criteria andAskSizeIn(List<Integer> values) {
+            addCriterion("ask_size in", values, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceNotIn(List<Float> values) {
-            addCriterion("sell_current_price not in", values, "sellCurrentPrice");
+        public Criteria andAskSizeNotIn(List<Integer> values) {
+            addCriterion("ask_size not in", values, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceBetween(Float value1, Float value2) {
-            addCriterion("sell_current_price between", value1, value2, "sellCurrentPrice");
+        public Criteria andAskSizeBetween(Integer value1, Integer value2) {
+            addCriterion("ask_size between", value1, value2, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceNotBetween(Float value1, Float value2) {
-            addCriterion("sell_current_price not between", value1, value2, "sellCurrentPrice");
+        public Criteria andAskSizeNotBetween(Integer value1, Integer value2) {
+            addCriterion("ask_size not between", value1, value2, "askSize");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateIsNull() {
-            addCriterion("price_current_date is null");
+        public Criteria andAskPriceIsNull() {
+            addCriterion("ask_price is null");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateIsNotNull() {
-            addCriterion("price_current_date is not null");
+        public Criteria andAskPriceIsNotNull() {
+            addCriterion("ask_price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateEqualTo(Date value) {
-            addCriterion("price_current_date =", value, "priceCurrentDate");
+        public Criteria andAskPriceEqualTo(Float value) {
+            addCriterion("ask_price =", value, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateNotEqualTo(Date value) {
-            addCriterion("price_current_date <>", value, "priceCurrentDate");
+        public Criteria andAskPriceNotEqualTo(Float value) {
+            addCriterion("ask_price <>", value, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateGreaterThan(Date value) {
-            addCriterion("price_current_date >", value, "priceCurrentDate");
+        public Criteria andAskPriceGreaterThan(Float value) {
+            addCriterion("ask_price >", value, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateGreaterThanOrEqualTo(Date value) {
-            addCriterion("price_current_date >=", value, "priceCurrentDate");
+        public Criteria andAskPriceGreaterThanOrEqualTo(Float value) {
+            addCriterion("ask_price >=", value, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateLessThan(Date value) {
-            addCriterion("price_current_date <", value, "priceCurrentDate");
+        public Criteria andAskPriceLessThan(Float value) {
+            addCriterion("ask_price <", value, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateLessThanOrEqualTo(Date value) {
-            addCriterion("price_current_date <=", value, "priceCurrentDate");
+        public Criteria andAskPriceLessThanOrEqualTo(Float value) {
+            addCriterion("ask_price <=", value, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateIn(List<Date> values) {
-            addCriterion("price_current_date in", values, "priceCurrentDate");
+        public Criteria andAskPriceIn(List<Float> values) {
+            addCriterion("ask_price in", values, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateNotIn(List<Date> values) {
-            addCriterion("price_current_date not in", values, "priceCurrentDate");
+        public Criteria andAskPriceNotIn(List<Float> values) {
+            addCriterion("ask_price not in", values, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateBetween(Date value1, Date value2) {
-            addCriterion("price_current_date between", value1, value2, "priceCurrentDate");
+        public Criteria andAskPriceBetween(Float value1, Float value2) {
+            addCriterion("ask_price between", value1, value2, "askPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateNotBetween(Date value1, Date value2) {
-            addCriterion("price_current_date not between", value1, value2, "priceCurrentDate");
+        public Criteria andAskPriceNotBetween(Float value1, Float value2) {
+            addCriterion("ask_price not between", value1, value2, "askPrice");
             return (Criteria) this;
         }
     }

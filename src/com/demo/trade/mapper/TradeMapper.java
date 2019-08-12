@@ -3,10 +3,8 @@ package com.demo.trade.mapper;
 import com.demo.trade.pojo.Trade;
 import com.demo.trade.pojo.TradeExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface TradeMapper {
     int countByExample(TradeExample example);
 

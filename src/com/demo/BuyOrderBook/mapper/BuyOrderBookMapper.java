@@ -3,10 +3,8 @@ package com.demo.BuyOrderBook.mapper;
 import com.demo.BuyOrderBook.pojo.BuyOrderBook;
 import com.demo.BuyOrderBook.pojo.BuyOrderBookExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface BuyOrderBookMapper {
     int countByExample(BuyOrderBookExample example);
 
