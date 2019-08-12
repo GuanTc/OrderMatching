@@ -17,23 +17,33 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
-    private UserServiceImpl userService;
-
-    @RequestMapping("/register")
-    public String register(User user){
-        userService.register(user);
-        return "index";
-    }
-    @RequestMapping("/toAdd")
-    public String toAdd(){
-        return "add";
-    }
-
-    @RequestMapping("/findAll")
-    @ResponseBody
-    public List<User> findAll(){
-      return userService.findAll();
-    }
+//    @Autowired
+//    private UserServiceImpl userService;
+//
+//    @RequestMapping("/register")
+//    public String register(User user){
+//        userService.register(user);
+//        return "index";
+//    }
+//    @RequestMapping("/toAdd")
+//    public String toAdd(){
+//        return "add";
+//    }
+//
+//    @RequestMapping("/findAll")
+//    @ResponseBody
+//    public List<User> findAll(){
+//      return userService.findAll();
+//    }
+//
+//    @RequestMapping("/login")
+//    public String login(User user){
+//        user = userService.login(user);
+//        if(user == null){
+//            return "";
+//        }else{
+//            return  "";
+//        }
+//    }
 
 }

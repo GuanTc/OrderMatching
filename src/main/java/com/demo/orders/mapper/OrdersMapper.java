@@ -4,10 +4,8 @@ import com.demo.entities.Trade;
 import com.demo.orders.pojo.Orders;
 import com.demo.orders.pojo.OrdersExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface OrdersMapper {
     int countByExample(OrdersExample example);
 
