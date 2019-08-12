@@ -7,6 +7,8 @@ import com.demo.user.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author: WANGSHUAIYI
  * @date : 2019/8/12
@@ -20,5 +22,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void register(User user) {
         userMapper.insert(user);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userMapper.finAll();
     }
 }
