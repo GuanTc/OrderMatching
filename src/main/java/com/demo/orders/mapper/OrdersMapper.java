@@ -1,5 +1,6 @@
 package com.demo.orders.mapper;
 
+import com.demo.entities.Trade;
 import com.demo.orders.pojo.Orders;
 import com.demo.orders.pojo.OrdersExample;
 import java.util.List;

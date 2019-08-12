@@ -445,4 +445,5 @@
       final_date = #{finalDate,jdbcType=DATE}
     where order_id = #{orderId,jdbcType=BIGINT}
   </update>
+
 </mapper>
