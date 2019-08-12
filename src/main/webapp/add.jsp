@@ -8,9 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <form id="addBuyOrderBook" action="${pageContext.request.contextPath }/BuyOrderBook/add" method="post">
-        <input type="text" placeholder="请输入数量" name="buySize" id="buySize"/>
-        <input type="text" placeholder="请输入价格" name="buyPrice" id="buyPrice"/>
+    <form id="addBuyOrderBook" action="${pageContext.request.contextPath }/user/register" method="post">
+        <input type="text" placeholder="username" name="username" id="username"/>
+        <input type="text" placeholder="password" name="password" id="password"/>
+        <input type="text" placeholder="name" name="name" id="name"/>
         <button type="submit" value="提交" name="提交">提交</button>
     </form>
 

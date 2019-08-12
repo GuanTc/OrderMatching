@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.demo.SellOrderBook.pojo.SellOrderBook" >
     <id column="sob_id" property="sobId" jdbcType="BIGINT" />
     <result column="stock_id" property="stockId" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
     <result column="ask_size" property="askSize" jdbcType="INTEGER" />
     <result column="ask_price" property="askPrice" jdbcType="REAL" />
   </resultMap>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    sob_id, stock_id, ask_size, ask_price
+    sob_id, stock_id, order_id, ask_size, ask_price
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.demo.SellOrderBook.pojo.SellOrderBookExample" >
     select
@@ -99,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.demo.SellOrderBook.pojo.SellOrderBook" >
-    insert into sell_order_book (sob_id, stock_id, ask_size, 
-      ask_price)
-    values (#{sobId,jdbcType=BIGINT}, #{stockId,jdbcType=BIGINT}, #{askSize,jdbcType=INTEGER}, 
-      #{askPrice,jdbcType=REAL})
+    insert into sell_order_book (sob_id, stock_id, order_id, 
+      ask_size, ask_price)
+    values (#{sobId,jdbcType=BIGINT}, #{stockId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
+      #{askSize,jdbcType=INTEGER}, #{askPrice,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.demo.SellOrderBook.pojo.SellOrderBook" >
     insert into sell_order_book
@@ -112,6 +113,9 @@
       </if>
       <if test="stockId != null" >
         stock_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
       </if>
       <if test="askSize != null" >
         ask_size,
@@ -126,6 +130,9 @@
       </if>
       <if test="stockId != null" >
         #{stockId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
       </if>
       <if test="askSize != null" >
         #{askSize,jdbcType=INTEGER},
@@ -150,6 +157,9 @@
       <if test="record.stockId != null" >
         stock_id = #{record.stockId,jdbcType=BIGINT},
       </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=BIGINT},
+      </if>
       <if test="record.askSize != null" >
         ask_size = #{record.askSize,jdbcType=INTEGER},
       </if>
@@ -165,6 +175,7 @@
     update sell_order_book
     set sob_id = #{record.sobId,jdbcType=BIGINT},
       stock_id = #{record.stockId,jdbcType=BIGINT},
+      order_id = #{record.orderId,jdbcType=BIGINT},
       ask_size = #{record.askSize,jdbcType=INTEGER},
       ask_price = #{record.askPrice,jdbcType=REAL}
     <if test="_parameter != null" >
@@ -176,6 +187,9 @@
     <set >
       <if test="stockId != null" >
         stock_id = #{stockId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=BIGINT},
       </if>
       <if test="askSize != null" >
         ask_size = #{askSize,jdbcType=INTEGER},
@@ -189,6 +203,7 @@
   <update id="updateByPrimaryKey" parameterType="com.demo.SellOrderBook.pojo.SellOrderBook" >
     update sell_order_book
     set stock_id = #{stockId,jdbcType=BIGINT},
+      order_id = #{orderId,jdbcType=BIGINT},
       ask_size = #{askSize,jdbcType=INTEGER},
       ask_price = #{askPrice,jdbcType=REAL}
     where sob_id = #{sobId,jdbcType=BIGINT}

@@ -5,6 +5,8 @@ public class BuyOrderBook {
 
     private Long stockId;
 
+    private Long orderId;
+
     private Integer buySize;
 
     private Float buyPrice;
@@ -23,6 +25,14 @@ public class BuyOrderBook {
 
     public void setStockId(Long stockId) {
         this.stockId = stockId;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public Integer getBuySize() {
