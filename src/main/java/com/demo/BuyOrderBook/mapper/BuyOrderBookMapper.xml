@@ -208,4 +208,8 @@
       buy_price = #{buyPrice,jdbcType=REAL}
     where bob_id = #{bobId,jdbcType=BIGINT}
   </update>
+
+  <select id="selectMaxCurrentPrice" resultType="Float">
+    select max(price) from buy_order_book where stock_id=#{stockId,jdbcType=LONG}
+  </select>
 </mapper>

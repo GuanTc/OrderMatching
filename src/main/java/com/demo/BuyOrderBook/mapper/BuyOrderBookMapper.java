@@ -27,4 +27,6 @@ public interface BuyOrderBookMapper {
     int updateByPrimaryKeySelective(BuyOrderBook record);
 
     int updateByPrimaryKey(BuyOrderBook record);
+
+    float selectMaxCurrentPrice(Long stockId);
 }
