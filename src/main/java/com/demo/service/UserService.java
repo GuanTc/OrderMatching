@@ -14,11 +14,24 @@ public interface UserService {
      * 注册
      * @param user
      */
-    void register(User user);
+    int register(User user);
 
     /**
      * 查找全部
      * @return
      */
     List<User> findAll();
+
+    /**
+     * 登陆
+     * @param user
+     * @return
+     */
+    User login(User user);
+
+    /**
+     * 更新代码
+     * @param user
+     */
+    void update(User user);
 }
