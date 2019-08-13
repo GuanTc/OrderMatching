@@ -37,11 +37,32 @@ public class Orders {
 
     private Date submitDate;
 
+
+
     private Integer status;
 
     private Date sendOutDate;
 
     private Date finalDate;
+
+    private String username;
+    private String stockName;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getStockName() {
+        return stockName;
+    }
+
+    public void setStockName(String stockName) {
+        this.stockName = stockName;
+    }
 
     public Long getOrderId() {
         return orderId;

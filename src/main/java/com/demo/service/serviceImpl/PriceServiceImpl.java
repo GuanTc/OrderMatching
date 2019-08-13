@@ -25,6 +25,7 @@ public class PriceServiceImpl implements priceService {
     @Override
     @Transactional
     public void addPrice(Price price) {
+
         priceMapper.insert(price);
     }
 

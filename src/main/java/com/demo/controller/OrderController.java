@@ -1,7 +1,9 @@
 package com.demo.controller;
 
+import com.demo.common.ResultMap;
 import com.demo.orders.pojo.Orders;
 import com.demo.service.OrderService;
+import com.demo.service.UserService;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,10 +26,22 @@ import java.util.List;
 public class OrderController {
     @Autowired
     private OrderService orderService;
+
+
     @RequestMapping("/add")
-    public String AddOrder(Orders orders){
-        orderService.addOrder(orders);
-        return "add_orders";
+    @ResponseBody
+    public ResultMap AddOrder(Orders orders){
+        ResultMap map = new ResultMap();
+        try {
+            orderService.addOrder(orders);
+            map.Success();
+            map.setMsg("添加成功");
+
+        }catch (Exception e){
+            map.Error();
+            map.setMsg("网络异常");
+        }
+        return map;
     }
     @RequestMapping("toAdd")
     public String toAdd(){
@@ -37,27 +51,45 @@ public class OrderController {
 
     @RequestMapping("/findAll")
     @ResponseBody
-    public List<Orders> findAll(){
-        return orderService.findAll();
+    public ResultMap findAll(){
+        ResultMap map = new ResultMap();
+        try {
+            List<Orders> list = orderService.findAll();
+            map.Success();
+            map.setObject(list);
+            for (int i=0;i<list.size();i++){
+                System.out.println(list.get(i));
+            }
+        }catch (Exception e){
+            map.Error();
+            map.setMsg("网络异常");
+
+        }
+        return  map;
     }
 
 
     @RequestMapping("/findOrdersByCondition")
     @ResponseBody
-    public List<Orders> findOrdersByCondition(Orders orders, String start, String end){
+    public ResultMap findOrdersByCondition(Orders orders, String start, String end){
         System.out.println(orders);
         System.out.println("strat:"+start);
         System.out.println("end:"+end);
+        ResultMap map = new ResultMap();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date startdate = null;
         Date enddate = null;
         try {
             startdate  = format.parse(start);
             enddate = format.parse(end);
+            List<Orders> list = orderService.findOrdersByCondition(orders,startdate,enddate);
+            map.Success();
+            map.setObject(list);
         }catch (Exception e){
-
+            map.Error();
+            map.setMsg("网络异常");
         }
-        return orderService.findOrdersByCondition(orders,startdate,enddate);
+        return map;
     }
 
 }

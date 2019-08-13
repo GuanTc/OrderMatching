@@ -1,5 +1,6 @@
 package com.demo.controller;
 
+import com.demo.common.ResultMap;
 import com.demo.service.StockSercive;
 import com.demo.stock.pojo.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,18 @@ public class StockController {
     private StockSercive stockSercive;
 
     @RequestMapping("/add")
-    public String addStock(Stock stock){
-        stockSercive.addStock(stock);
-        return "add_stock";
+    @ResponseBody
+    public ResultMap addStock(Stock stock){
+      ResultMap map = new ResultMap();
+        try {
+            stockSercive.addStock(stock);
+            map.Success();
+            map.setMsg("添加成功");
+        }catch (Exception e){
+            map.Error();
+            map.setMsg("网络异常");
+        }
+        return map;
     }
 
     @RequestMapping("/toAdd")
@@ -33,13 +43,31 @@ public class StockController {
 
     @RequestMapping("/findAll")
     @ResponseBody
-    public List<Stock> findAll(){
-        return stockSercive.findAll();
+    public ResultMap findAll(){
+        ResultMap map = new ResultMap();
+        try {
+            List<Stock> list = stockSercive.findAll();
+            map.Success();
+            map.setObject(list);
+        }catch (Exception e){
+            map.Error();
+            map.setMsg("网络异常");
+        }
+        return map;
     }
 
     @RequestMapping("/search")
     @ResponseBody
-    public List<Stock> findStockByContidions(Stock stock){
-        return stockSercive.findStockByConditions(stock);
+    public ResultMap findStockByContidions(Stock stock){
+        ResultMap map = new ResultMap();
+        try {
+            List<Stock> list = stockSercive.findStockByConditions(stock);
+            map.Success();
+            map.setObject(list);
+        }catch (Exception e){
+            map.Error();
+            map.setMsg("网络异常");
+        }
+        return map;
     }
 }

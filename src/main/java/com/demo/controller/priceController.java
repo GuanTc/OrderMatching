@@ -1,5 +1,6 @@
 package com.demo.controller;
 
+import com.demo.common.ResultMap;
 import com.demo.price.pojo.Price;
 import com.demo.service.priceService;
 import com.demo.service.serviceImpl.PriceServiceImpl;
@@ -24,26 +25,51 @@ public class priceController {
     private priceService priceService;
 
     @RequestMapping("/add")
-    public String addPrice(Price price){
-        priceService.addPrice(price);
-        return "";
+    @ResponseBody
+    public ResultMap addPrice(Price price){
+        ResultMap map = new ResultMap();
+       try{
+           priceService.addPrice(price);
+           map.Success();
+           map.setMsg("添加成功");
+       }catch (Exception e){
+           map.Error();
+           map.setMsg("网络异常");
+       }
+        return map;
     }
+
     @RequestMapping("/findAll")
     @ResponseBody
-    public List<Price> findAll(){
-        return priceService.findAll();
+    public ResultMap findAll(){
+        ResultMap map = new ResultMap();
+        try {
+            List<Price> list = priceService.findAll();
+            map.Success();
+            map.setObject(list);
+        }catch (Exception e){
+            map.Error();
+            map.setMsg("网络异常");
+        }
+        return map;
     }
 
     @RequestMapping("/findPriceByConditions")
     @ResponseBody
-    public List<Price> findPriceByConditions(Price price,String start,String end){
+    public ResultMap findPriceByConditions(Price price,String start,String end){
+        ResultMap map = new ResultMap();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             Date startdate = format.parse(start);
             Date enddate  = format.parse(end);
-           return priceService.findPriceByConditions(price,startdate,enddate);
+            List<Price> list = priceService.findPriceByConditions(price,startdate,enddate);
+            map.Success();
+            map.setObject(list);
+            return map;
         }catch (Exception e){
-            return null;
+            map.Error();
+            map.setMsg("网络异常");
+            return map;
         }
     }
 

@@ -5,7 +5,7 @@ package com.demo.common;
  * @date : 2019/8/12
  * @description:
  */
-public class resultMap {
+public class ResultMap {
     final static String SUCCESS = "SUCCESS";
     final static String ERROR = "ERROR";
     private String status;
