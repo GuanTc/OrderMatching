@@ -2,13 +2,9 @@ package com.demo.orders.mapper;
 
 import com.demo.orders.pojo.Orders;
 import com.demo.orders.pojo.OrdersExample;
-
-import java.util.Date;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface OrdersMapper {
     int countByExample(OrdersExample example);
 
@@ -31,10 +27,4 @@ public interface OrdersMapper {
     int updateByPrimaryKeySelective(Orders record);
 
     int updateByPrimaryKey(Orders record);
-
-    List<Long> getOrderIdListLimit(@Param("rows")int rows, @Param("stockId")Long stockId);
-
-    void updateOrderFinished(@Param("orderId")Long orderId, @Param("qty")int qty, @Param("i")int i, @Param("date")Date date);
-
-    Orders selectByPrimaryKeyAndStatus(Long orderId);
 }

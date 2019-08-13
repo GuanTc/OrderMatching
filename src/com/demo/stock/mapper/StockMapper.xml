@@ -79,7 +79,7 @@
     </if>
     <if test="orderByClause != null" >
       order by ${orderByClause}
-    </if>selectByExample
+    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -178,8 +178,4 @@
       stock_name = #{stockName,jdbcType=VARCHAR}
     where stock_id = #{stockId,jdbcType=BIGINT}
   </update>
-
-  <select id="selectList" resultMap="BaseResultMap">
-    select * from stock
-  </select>
 </mapper>

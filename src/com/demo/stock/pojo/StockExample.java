@@ -1,17 +1,16 @@
-package com.demo.price.pojo;
+package com.demo.stock.pojo;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class PriceExample {
+public class StockExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public PriceExample() {
+    public StockExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -105,66 +104,6 @@ public class PriceExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andPriceIdIsNull() {
-            addCriterion("price_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIdIsNotNull() {
-            addCriterion("price_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIdEqualTo(Long value) {
-            addCriterion("price_id =", value, "priceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIdNotEqualTo(Long value) {
-            addCriterion("price_id <>", value, "priceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIdGreaterThan(Long value) {
-            addCriterion("price_id >", value, "priceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("price_id >=", value, "priceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIdLessThan(Long value) {
-            addCriterion("price_id <", value, "priceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIdLessThanOrEqualTo(Long value) {
-            addCriterion("price_id <=", value, "priceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIdIn(List<Long> values) {
-            addCriterion("price_id in", values, "priceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIdNotIn(List<Long> values) {
-            addCriterion("price_id not in", values, "priceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIdBetween(Long value1, Long value2) {
-            addCriterion("price_id between", value1, value2, "priceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceIdNotBetween(Long value1, Long value2) {
-            addCriterion("price_id not between", value1, value2, "priceId");
-            return (Criteria) this;
-        }
-
         public Criteria andStockIdIsNull() {
             addCriterion("stock_id is null");
             return (Criteria) this;
@@ -225,183 +164,143 @@ public class PriceExample {
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceIsNull() {
-            addCriterion("buy_current_price is null");
+        public Criteria andStockCodeIsNull() {
+            addCriterion("stock_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceIsNotNull() {
-            addCriterion("buy_current_price is not null");
+        public Criteria andStockCodeIsNotNull() {
+            addCriterion("stock_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceEqualTo(Float value) {
-            addCriterion("buy_current_price =", value, "buyCurrentPrice");
+        public Criteria andStockCodeEqualTo(String value) {
+            addCriterion("stock_code =", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceNotEqualTo(Float value) {
-            addCriterion("buy_current_price <>", value, "buyCurrentPrice");
+        public Criteria andStockCodeNotEqualTo(String value) {
+            addCriterion("stock_code <>", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceGreaterThan(Float value) {
-            addCriterion("buy_current_price >", value, "buyCurrentPrice");
+        public Criteria andStockCodeGreaterThan(String value) {
+            addCriterion("stock_code >", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceGreaterThanOrEqualTo(Float value) {
-            addCriterion("buy_current_price >=", value, "buyCurrentPrice");
+        public Criteria andStockCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("stock_code >=", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceLessThan(Float value) {
-            addCriterion("buy_current_price <", value, "buyCurrentPrice");
+        public Criteria andStockCodeLessThan(String value) {
+            addCriterion("stock_code <", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceLessThanOrEqualTo(Float value) {
-            addCriterion("buy_current_price <=", value, "buyCurrentPrice");
+        public Criteria andStockCodeLessThanOrEqualTo(String value) {
+            addCriterion("stock_code <=", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceIn(List<Float> values) {
-            addCriterion("buy_current_price in", values, "buyCurrentPrice");
+        public Criteria andStockCodeLike(String value) {
+            addCriterion("stock_code like", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceNotIn(List<Float> values) {
-            addCriterion("buy_current_price not in", values, "buyCurrentPrice");
+        public Criteria andStockCodeNotLike(String value) {
+            addCriterion("stock_code not like", value, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceBetween(Float value1, Float value2) {
-            addCriterion("buy_current_price between", value1, value2, "buyCurrentPrice");
+        public Criteria andStockCodeIn(List<String> values) {
+            addCriterion("stock_code in", values, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andBuyCurrentPriceNotBetween(Float value1, Float value2) {
-            addCriterion("buy_current_price not between", value1, value2, "buyCurrentPrice");
+        public Criteria andStockCodeNotIn(List<String> values) {
+            addCriterion("stock_code not in", values, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceIsNull() {
-            addCriterion("sell_current_price is null");
+        public Criteria andStockCodeBetween(String value1, String value2) {
+            addCriterion("stock_code between", value1, value2, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceIsNotNull() {
-            addCriterion("sell_current_price is not null");
+        public Criteria andStockCodeNotBetween(String value1, String value2) {
+            addCriterion("stock_code not between", value1, value2, "stockCode");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceEqualTo(Float value) {
-            addCriterion("sell_current_price =", value, "sellCurrentPrice");
+        public Criteria andStockNameIsNull() {
+            addCriterion("stock_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceNotEqualTo(Float value) {
-            addCriterion("sell_current_price <>", value, "sellCurrentPrice");
+        public Criteria andStockNameIsNotNull() {
+            addCriterion("stock_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceGreaterThan(Float value) {
-            addCriterion("sell_current_price >", value, "sellCurrentPrice");
+        public Criteria andStockNameEqualTo(String value) {
+            addCriterion("stock_name =", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceGreaterThanOrEqualTo(Float value) {
-            addCriterion("sell_current_price >=", value, "sellCurrentPrice");
+        public Criteria andStockNameNotEqualTo(String value) {
+            addCriterion("stock_name <>", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceLessThan(Float value) {
-            addCriterion("sell_current_price <", value, "sellCurrentPrice");
+        public Criteria andStockNameGreaterThan(String value) {
+            addCriterion("stock_name >", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceLessThanOrEqualTo(Float value) {
-            addCriterion("sell_current_price <=", value, "sellCurrentPrice");
+        public Criteria andStockNameGreaterThanOrEqualTo(String value) {
+            addCriterion("stock_name >=", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceIn(List<Float> values) {
-            addCriterion("sell_current_price in", values, "sellCurrentPrice");
+        public Criteria andStockNameLessThan(String value) {
+            addCriterion("stock_name <", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceNotIn(List<Float> values) {
-            addCriterion("sell_current_price not in", values, "sellCurrentPrice");
+        public Criteria andStockNameLessThanOrEqualTo(String value) {
+            addCriterion("stock_name <=", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceBetween(Float value1, Float value2) {
-            addCriterion("sell_current_price between", value1, value2, "sellCurrentPrice");
+        public Criteria andStockNameLike(String value) {
+            addCriterion("stock_name like", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andSellCurrentPriceNotBetween(Float value1, Float value2) {
-            addCriterion("sell_current_price not between", value1, value2, "sellCurrentPrice");
+        public Criteria andStockNameNotLike(String value) {
+            addCriterion("stock_name not like", value, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateIsNull() {
-            addCriterion("price_current_date is null");
+        public Criteria andStockNameIn(List<String> values) {
+            addCriterion("stock_name in", values, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateIsNotNull() {
-            addCriterion("price_current_date is not null");
+        public Criteria andStockNameNotIn(List<String> values) {
+            addCriterion("stock_name not in", values, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateEqualTo(Date value) {
-            addCriterion("price_current_date =", value, "priceCurrentDate");
+        public Criteria andStockNameBetween(String value1, String value2) {
+            addCriterion("stock_name between", value1, value2, "stockName");
             return (Criteria) this;
         }
 
-        public Criteria andPriceCurrentDateNotEqualTo(Date value) {
-            addCriterion("price_current_date <>", value, "priceCurrentDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceCurrentDateGreaterThan(Date value) {
-            addCriterion("price_current_date >", value, "priceCurrentDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceCurrentDateGreaterThanOrEqualTo(Date value) {
-            addCriterion("price_current_date >=", value, "priceCurrentDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceCurrentDateLessThan(Date value) {
-            addCriterion("price_current_date <", value, "priceCurrentDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceCurrentDateLessThanOrEqualTo(Date value) {
-            addCriterion("price_current_date <=", value, "priceCurrentDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceCurrentDateIn(List<Date> values) {
-            addCriterion("price_current_date in", values, "priceCurrentDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceCurrentDateNotIn(List<Date> values) {
-            addCriterion("price_current_date not in", values, "priceCurrentDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceCurrentDateBetween(Date value1, Date value2) {
-            addCriterion("price_current_date between", value1, value2, "priceCurrentDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceCurrentDateNotBetween(Date value1, Date value2) {
-            addCriterion("price_current_date not between", value1, value2, "priceCurrentDate");
+        public Criteria andStockNameNotBetween(String value1, String value2) {
+            addCriterion("stock_name not between", value1, value2, "stockName");
             return (Criteria) this;
         }
     }

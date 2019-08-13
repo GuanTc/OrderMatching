@@ -3,10 +3,8 @@ package com.demo.price.mapper;
 import com.demo.price.pojo.Price;
 import com.demo.price.pojo.PriceExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface PriceMapper {
     int countByExample(PriceExample example);
 

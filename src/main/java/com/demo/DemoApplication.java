@@ -1,6 +1,6 @@
 package com.demo;
 
-
+import com.demo.entities.Matching;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +16,10 @@ public class DemoApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context =SpringApplication.run(DemoApplication.class, args);
-
+        Matching matching=context.getBean(Matching.class);
+        //GetOrders getOrders=context.getBean(GetOrders.class);
+        matching.match();
+        //getOrders.getOrder();
     }
 
 }

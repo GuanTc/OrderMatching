@@ -209,7 +209,20 @@
     where bob_id = #{bobId,jdbcType=BIGINT}
   </update>
 
-  <select id="selectMaxCurrentPrice" resultType="Float">
-    select max(price) from buy_order_book where stock_id=#{stockId,jdbcType=LONG}
+  <select id="selectMaxCurrentPrice" resultMap="BaseResultMap">
+      select * from buy_order_book where stock_id=#{stockId,jdbcType=BIGINT} order by buy_price desc limit 0,1
   </select>
+
+  <update id="updateBuySize">
+    update buy_order_book set buy_size=#{remainQty,jdbcType=INTEGER} where bob_id=#{bobId,jdbcType=BIGINT}
+  </update>
+
+  <delete id="deleteByOrderId" parameterType="java.lang.Long" >
+    delete from buy_order_book
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </delete>
+
+  <update id="updateBuySizeByOrderId">
+    update buy_order_book set buy_size=#{remainQty,jdbcType=INTEGER} where order_id=#{orderId,jdbcType=BIGINT}
+  </update>
 </mapper>

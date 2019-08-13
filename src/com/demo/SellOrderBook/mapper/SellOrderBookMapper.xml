@@ -208,21 +208,4 @@
       ask_price = #{askPrice,jdbcType=REAL}
     where sob_id = #{sobId,jdbcType=BIGINT}
   </update>
-
-  <select id="selectMinCurrentPrice" resultMap="BaseResultMap">
-    select * from sell_order_book where stock_id=#{stockId,jdbcType=BIGINT} order by ask_price asc limit 0,1
-  </select>
-
-  <update id="updateAskSize">
-    update sell_order_book set ask_size=#{remainQty,jdbcType=INTEGER} where sob_id=#{sobId,jdbcType=BIGINT}
-  </update>
-
-  <delete id="deleteByOrderId" parameterType="java.lang.Long" >
-    delete from sell_order_book
-    where order_id = #{orderId,jdbcType=BIGINT}
-  </delete>
-
-  <update id="updateSellSizeByOrderId">
-    update sell_order_book set ask_size=#{remainQty,jdbcType=INTEGER} where order_id=#{orderId,jdbcType=BIGINT}
-  </update>
 </mapper>

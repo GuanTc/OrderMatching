@@ -445,20 +445,4 @@
       final_date = #{finalDate,jdbcType=TIMESTAMP}
     where order_id = #{orderId,jdbcType=BIGINT}
   </update>
-
-  <select id="getOrderIdListLimit" resultType="java.lang.Long">
-    select * from orders where stock_id=#{stockId,jdbcType=BIGINT} and status=1 limit 0,#{rows,jdbcType=INTEGER}
-  </select>
-
-  <update id="updateOrderFinished">
-    update orders set remain_qty=#{qty,jdbcType=INTEGER},status=#{i,jdbcType=INTEGER},final_date=#{date,jdbcType=TIMESTAMP} where order_id=#{orderId,jdbcType=BIGINT}
-  </update>
-
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select
-    <include refid="Base_Column_List" />
-    from orders
-    where order_id = #{orderId,jdbcType=BIGINT} and status=1
-  </select>
-
 </mapper>
