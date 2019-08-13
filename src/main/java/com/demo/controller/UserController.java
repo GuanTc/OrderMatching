@@ -1,6 +1,7 @@
 
 package com.demo.controller;
 
+import com.demo.common.ResultMap;
 import com.demo.service.UserService;
 import com.demo.user.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +29,18 @@ public class UserController {
      * @return
      */
     @RequestMapping("/register")
-    public String register(User user,Model model){
-        int result = userService.register(user);
-        if(result==0){
-            model.addAttribute("msg","username不可用");
-            return "add";
-        }else {
-            return "login";
-        }
+    @ResponseBody
+    public ResultMap register(User user){
+        ResultMap map = new ResultMap();
+       try {
+           userService.register(user);
+           map.Success();
+           map.setMsg("注册成功");
+       }catch (Exception e){
+           map.Error();
+           map.setMsg("网络异常");
+       }
+       return map;
     }
 
     /**
@@ -44,24 +49,37 @@ public class UserController {
      */
     @RequestMapping("/findAll")
     @ResponseBody
-    private List<User> findAll(){
-        return userService.findAll();
+    private ResultMap findAll(){
+        ResultMap map = new  ResultMap();
+        try {
+             List<User> list = userService.findAll();
+             map.Success();
+             map.setObject(list);
+        }catch (Exception e){
+            map.Error();
+            map.setMsg("network anomaly");
+        }
+        return map;
     }
 
     /**
      * 登陆
      * @param user
-     * @param model
      * @return
      */
     @RequestMapping("/login")
-    public String login(User user,Model model){
+    @ResponseBody
+    public ResultMap login(User user){
         user = userService.login(user);
+        ResultMap map = new ResultMap();
         if(user == null){
-            model.addAttribute("msg","账号密码错误");
-            return "login";
+            map.Error();
+            map.setMsg("账号密码错误");
+            return map;
         }else {
-            return "index";
+            map.Success();
+            map.setMsg("登陆成功");
+            return map;
         }
     }
 
@@ -71,18 +89,24 @@ public class UserController {
      * @return
      */
     @RequestMapping("/update")
-    public String update(User user){
+    @ResponseBody
+    public ResultMap update(User user){
+        ResultMap map = new ResultMap();
         try {
             System.out.println(user);
             userService.update(user);
-            return "login";
+            map.Success();
+            map.setMsg("修改成功");
+            return  map;
         }catch (Exception e){
-            return "index";
+            map.Error();
+            map.setMsg("网络异常");
+            return map;
         }
     }
     @RequestMapping("/toAdd")
     public  String toAdd(){
-        return "add";
+        return "add_user";
     }
 
 
