@@ -208,4 +208,8 @@
       price_current_date = #{priceCurrentDate,jdbcType=TIMESTAMP}
     where price_id = #{priceId,jdbcType=BIGINT}
   </update>
+
+  <select id="findAll" resultMap="BaseResultMap" >
+    select  * from price
+  </select>
 </mapper>

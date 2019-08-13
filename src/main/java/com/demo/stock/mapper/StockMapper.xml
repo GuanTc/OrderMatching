@@ -79,7 +79,7 @@
     </if>
     <if test="orderByClause != null" >
       order by ${orderByClause}
-    </if>selectByExample
+    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -181,5 +181,10 @@
 
   <select id="selectList" resultMap="BaseResultMap">
     select * from stock
+  </select>
+
+  <!-- wsy 8.13-->
+  <select id="findAll" resultMap="BaseResultMap">
+      select * from stock
   </select>
 </mapper>

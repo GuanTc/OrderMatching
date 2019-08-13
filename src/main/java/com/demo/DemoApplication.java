@@ -17,9 +17,9 @@ public class DemoApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context =SpringApplication.run(DemoApplication.class, args);
-        Matching matching=context.getBean(Matching.class);
+     //   Matching matching=context.getBean(Matching.class);
         //GetOrders getOrders=context.getBean(GetOrders.class);
-        matching.match();
+      //  matching.match();
         //getOrders.getOrder();
     }
 

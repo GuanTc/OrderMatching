@@ -1,8 +1,7 @@
+
 package com.demo.controller;
 
-
 import com.demo.service.UserService;
-import com.demo.service.serviceImpl.UserServiceImpl;
 import com.demo.user.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,13 +29,13 @@ public class UserController {
      */
     @RequestMapping("/register")
     public String register(User user,Model model){
-       int result = userService.register(user);
-       if(result==0){
-           model.addAttribute("msg","username不可用");
-           return "add";
-       }else {
-           return "login";
-       }
+        int result = userService.register(user);
+        if(result==0){
+            model.addAttribute("msg","username不可用");
+            return "add";
+        }else {
+            return "login";
+        }
     }
 
     /**
@@ -73,13 +72,13 @@ public class UserController {
      */
     @RequestMapping("/update")
     public String update(User user){
-      try {
-          System.out.println(user);
-          userService.update(user);
-          return "login";
-      }catch (Exception e){
-          return "index";
-      }
+        try {
+            System.out.println(user);
+            userService.update(user);
+            return "login";
+        }catch (Exception e){
+            return "index";
+        }
     }
     @RequestMapping("/toAdd")
     public  String toAdd(){
@@ -88,3 +87,4 @@ public class UserController {
 
 
 }
+

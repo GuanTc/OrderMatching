@@ -37,4 +37,6 @@ public interface SellOrderBookMapper {
     void deleteByOrderId(Long orderId);
 
     void updateSellSizeByOrderId(@Param("remainQty")int remainQty, @Param("orderId")Long orderId);
+
+    List<SellOrderBook> findMinPrice(Long stockId);
 }

@@ -29,4 +29,6 @@ public interface PriceMapper {
     int updateByPrimaryKeySelective(Price record);
 
     int updateByPrimaryKey(Price record);
+
+    List<Price> findAll();
 }

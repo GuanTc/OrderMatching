@@ -3,6 +3,7 @@ package com.demo.service.serviceImpl;
 import com.demo.service.StockSercive;
 import com.demo.stock.mapper.StockMapper;
 import com.demo.stock.pojo.Stock;
+import com.demo.stock.pojo.StockExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,18 +23,24 @@ public class StockServiceImpl implements StockSercive {
     @Override
     @Transactional
     public int addStock(Stock stock) {
-
-
-       return 0;
+        return stockMapper.insert(stock);
     }
 
     @Override
     public List<Stock> findAll() {
-        return null;
+        return stockMapper.findAll();
     }
 
     @Override
     public List<Stock> findStockByConditions(Stock stock) {
-        return null;
+        StockExample example = new StockExample();
+        StockExample.Criteria criteria = example.createCriteria();
+
+        if(stock != null){
+            if(!"".equals(stock.getStockCode())){
+                criteria.andStockCodeLike("%"+stock.getStockCode()+"%");
+            }
+        }
+        return stockMapper.selectByExample(example);
     }
 }
