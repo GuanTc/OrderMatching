@@ -29,4 +29,6 @@ public interface TradeMapper {
     int updateByPrimaryKeySelective(Trade record);
 
     int updateByPrimaryKey(Trade record);
+
+    List<Trade> findAll();
 }

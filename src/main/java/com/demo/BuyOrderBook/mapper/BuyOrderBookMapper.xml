@@ -225,4 +225,13 @@
   <update id="updateBuySizeByOrderId">
     update buy_order_book set buy_size=#{remainQty,jdbcType=INTEGER} where order_id=#{orderId,jdbcType=BIGINT}
   </update>
+    <!--wsy 8.13添加-->
+  <select id="findAll" resultMap="BaseResultMap">
+    select  * from buy_order_book
+  </select>
+
+  <select id="findMaxPrice" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    SELECT *  FROM buy_order_book WHERE buy_price = (SELECT MAX(buy_price) FROM buy_order_book) AND stock_id =  #{sock_id,jdbcType=BIGINT}
+  </select>
+
 </mapper>

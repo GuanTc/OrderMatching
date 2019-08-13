@@ -37,4 +37,9 @@ public interface BuyOrderBookMapper {
     void deleteByOrderId(Long orderId);
 
     void updateBuySizeByOrderId(@Param("remainQty")int remainQty, @Param("orderId")Long orderId);
+
+    List<BuyOrderBook> findAll();
+
+    List<BuyOrderBook> findMaxPrice(Long sock_id);
+
 }

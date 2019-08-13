@@ -30,4 +30,13 @@ public class Stock {
     public void setStockName(String stockName) {
         this.stockName = stockName == null ? null : stockName.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Stock{" +
+                "stockId=" + stockId +
+                ", stockCode='" + stockCode + '\'' +
+                ", stockName='" + stockName + '\'' +
+                '}';
+    }
 }

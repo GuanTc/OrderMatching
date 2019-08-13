@@ -225,4 +225,9 @@
   <update id="updateSellSizeByOrderId">
     update sell_order_book set ask_size=#{remainQty,jdbcType=INTEGER} where order_id=#{orderId,jdbcType=BIGINT}
   </update>
+
+  <!-- wsy 8.13修改-->
+  <select id="findMinPrice" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    SELECT *  FROM sell_order_book WHERE ask_price = (SELECT MIN(ask_price) FROM sell_order_book) AND stock_id =  #{stockId,jdbcType=BIGINT}
+  </select>
 </mapper>

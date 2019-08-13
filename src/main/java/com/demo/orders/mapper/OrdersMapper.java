@@ -37,4 +37,6 @@ public interface OrdersMapper {
     void updateOrderFinished(@Param("orderId")Long orderId, @Param("qty")int qty, @Param("i")int i, @Param("date")Date date);
 
     Orders selectByPrimaryKeyAndStatus(Long orderId);
+
+    List<Orders> findAll();
 }

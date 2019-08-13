@@ -454,11 +454,15 @@
     update orders set remain_qty=#{qty,jdbcType=INTEGER},status=#{i,jdbcType=INTEGER},final_date=#{date,jdbcType=TIMESTAMP} where order_id=#{orderId,jdbcType=BIGINT}
   </update>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKeyAndStatus" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from orders
     where order_id = #{orderId,jdbcType=BIGINT} and status=1
   </select>
 
+<!-- wsy 8.13添加-->
+  <select id="findAll" resultMap="BaseResultMap">
+    select  * from orders ;
+  </select>
 </mapper>

@@ -202,4 +202,31 @@ public class Orders {
     public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
     }
+
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "orderId=" + orderId +
+                ", userId=" + userId +
+                ", stockId=" + stockId +
+                ", type='" + type + '\'' +
+                ", price=" + price +
+                ", qty=" + qty +
+                ", remainQty=" + remainQty +
+                ", orderType='" + orderType + '\'' +
+                ", marketPrice=" + marketPrice +
+                ", limitPrice=" + limitPrice +
+                ", triggerPrice=" + triggerPrice +
+                ", stopPrice=" + stopPrice +
+                ", fullOrKill=" + fullOrKill +
+                ", duration='" + duration + '\'' +
+                ", gtdDate=" + gtdDate +
+                ", minute=" + minute +
+                ", submitDate=" + submitDate +
+                ", status=" + status +
+                ", sendOutDate=" + sendOutDate +
+                ", finalDate=" + finalDate +
+                '}';
+    }
 }
