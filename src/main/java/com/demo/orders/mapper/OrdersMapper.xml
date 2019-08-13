@@ -101,7 +101,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from orders
     where order_id = #{orderId,jdbcType=BIGINT}
@@ -461,8 +461,7 @@
     where order_id = #{orderId,jdbcType=BIGINT} and status=1
   </select>
 
-<!-- wsy 8.13添加-->
-  <select id="findAll" resultMap="BaseResultMap">
-    select  * from orders ;
+  <select id="getOrderNotTrade" resultMap="BaseResultMap">
+    select * from orders where stock_id=#{stockId,jdbcType=BIGINT} and order_type=#{orderType,jdbcType=VARCHAR} and status=1
   </select>
 </mapper>

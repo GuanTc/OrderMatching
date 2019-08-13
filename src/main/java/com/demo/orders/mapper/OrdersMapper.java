@@ -38,5 +38,5 @@ public interface OrdersMapper {
 
     Orders selectByPrimaryKeyAndStatus(Long orderId);
 
-    List<Orders> findAll();
+    List<Orders> getOrderNotTrade(@Param("stockId")Long stockId, @Param("orderType")String orderType);
 }

@@ -34,175 +34,161 @@ public class Matching {
     @Async
     public void match() {
         //each time handling 20 rows
-        int rows=20;
+        int rows = 20;
         while (true) {
             //Get all stocks from stock table
             List<Stock> stockList = stockMapper.selectList();
             for (int i = 0; i < stockList.size(); i++) {
                 Long stockId = stockList.get(i).getStockId();
-                List<Long> orderIdList = ordersMapper.getOrderIdListLimit(rows,stockId);
-                for(int k=0;k<orderIdList.size();k++) {
-                    //do matching for this stock
-                    //get currentPrice
-                    Orders order = ordersMapper.selectByPrimaryKeyAndStatus(orderIdList.get(k));
-                    while (order != null) {
-                        int flag = 0, isTrade = 0;
-                        int tradeQty = 0;
-                        if (order.getType().equals("B")) {
-                            //matching for buy order
-                            SellOrderBook sob = sellOrderBookMapper.selectMinCurrentPrice(stockId);
-                            if(sob!=null) {
-                                if (order.getFullOrKill() == 1) {
-                                    //require Fill or Kill
-                                    //if qty is OK
-                                    tradeQty = order.getRemainQty();
-                                    if (order.getRemainQty() < sob.getAskSize()) {
-                                        //deal. Update order status and order book. insert this order to trade table
-                                        ordersMapper.updateOrderFinished(order.getOrderId(), 0, 2, new Date());
-                                        ordersMapper.updateOrderFinished(sob.getOrderId(), sob.getAskSize() - order.getRemainQty(), 1, new Date());
-                                        sellOrderBookMapper.updateAskSize(sob.getAskSize() - order.getRemainQty(), sob.getSobId());
-                                        buyOrderBookMapper.deleteByOrderId(order.getOrderId());
-                                        flag = 1;
-                                        isTrade = 1;
-                                    } else if (order.getRemainQty() == sob.getAskSize()) {
-                                        ordersMapper.updateOrderFinished(order.getOrderId(), 0, 2, new Date());
-                                        ordersMapper.updateOrderFinished(sob.getOrderId(), 0, 2, new Date());
-                                        sellOrderBookMapper.deleteByPrimaryKey(sob.getSobId());
-                                        buyOrderBookMapper.deleteByOrderId(order.getOrderId());
-                                        flag = 1;
-                                        isTrade = 1;
+                //firstly,check the market orders
+                List<Orders> marketOrderList=ordersMapper.getOrderNotTrade(stockId,"MKT");
+                if(marketOrderList!=null&&marketOrderList.size()!=0){
+                    //do matching for market orders
+                    for(int j=0;j<marketOrderList.size();j++){
+                        Orders marketOrder=marketOrderList.get(j);
+                        while(marketOrder!=null) {
+                            int flag=0;
+                            if (marketOrder.getType().equals("B")) {
+                                //market order is buy
+                                SellOrderBook sob = sellOrderBookMapper.selectMinCurrentPrice(stockId);
+                                if (sob != null) {
+                                    Orders sellOrder = ordersMapper.selectByPrimaryKey(sob.getOrderId());
+                                    Orders buyOrder = marketOrder;
+                                    if (buyOrder.getFullOrKill() == 1 && buyOrder.getRemainQty() > sellOrder.getRemainQty() ||
+                                            sellOrder.getFullOrKill() == 1 && sellOrder.getRemainQty() > buyOrder.getRemainQty()) {
+                                        //Full of Kill is not meet
+                                        System.out.println("The order of Full or Kill can't matching");
                                     } else {
-                                        //not matching
-                                        flag = 1;
+                                        //the orders matching
+                                        int tradeQty = 0;
+                                        if (buyOrder.getRemainQty() < sellOrder.getRemainQty()) {
+                                            tradeQty = buyOrder.getRemainQty();
+                                            ordersMapper.updateOrderFinished(buyOrder.getOrderId(), 0, 2, new Date());
+                                            ordersMapper.updateOrderFinished(sellOrder.getOrderId(), sellOrder.getRemainQty() - buyOrder.getRemainQty(), 1, new Date());
+                                            sellOrderBookMapper.updateSellSizeByOrderId(sellOrder.getRemainQty() - buyOrder.getRemainQty(), sellOrder.getOrderId());
+                                        } else if (buyOrder.getRemainQty() == sellOrder.getRemainQty()) {
+                                            tradeQty = buyOrder.getRemainQty();
+                                            ordersMapper.updateOrderFinished(buyOrder.getOrderId(), 0, 2, new Date());
+                                            ordersMapper.updateOrderFinished(sellOrder.getOrderId(), 0, 2, new Date());
+                                            sellOrderBookMapper.deleteByOrderId(sellOrder.getOrderId());
+                                        } else {
+                                            tradeQty = sellOrder.getRemainQty();
+                                            ordersMapper.updateOrderFinished(buyOrder.getOrderId(), buyOrder.getRemainQty() - sellOrder.getRemainQty(), 1, new Date());
+                                            ordersMapper.updateOrderFinished(sellOrder.getOrderId(), 0, 2, new Date());
+                                            sellOrderBookMapper.deleteByOrderId(sellOrder.getOrderId());
+                                            marketOrder.setRemainQty(buyOrder.getRemainQty() - sellOrder.getRemainQty());
+                                            flag=1;
+                                        }
+                                        //insert into trade table
+                                        Trade trade = new Trade();
+                                        trade.setUserId(buyOrder.getUserId());
+                                        trade.setStockId(stockId);
+                                        trade.setBuyOrderId(buyOrder.getOrderId());
+                                        trade.setSellOrderId(sellOrder.getOrderId());
+                                        trade.setPrice(sellOrder.getPrice());
+                                        trade.setQty(tradeQty);
+                                        trade.setTradeDate(new Date());
+                                        tradeMapper.insert(trade);
+                                        if(flag==0){
+                                            marketOrder=null;
+                                        }
                                     }
-                                } else {
-                                    //not require FOK
-                                    if (order.getRemainQty() < sob.getAskSize()) {
-                                        tradeQty = order.getRemainQty();
-                                        ordersMapper.updateOrderFinished(order.getOrderId(), 0, 2, new Date());
-                                        ordersMapper.updateOrderFinished(sob.getOrderId(), sob.getAskSize() - order.getRemainQty(), 1, new Date());
-                                        sellOrderBookMapper.updateAskSize(sob.getAskSize() - order.getRemainQty(), sob.getSobId());
-                                        buyOrderBookMapper.deleteByOrderId(order.getOrderId());
-                                        flag = 1;
-                                        isTrade = 1;
-                                    } else if (order.getRemainQty() == sob.getAskSize()) {
-                                        tradeQty = order.getRemainQty();
-                                        ordersMapper.updateOrderFinished(order.getOrderId(), 0, 2, new Date());
-                                        ordersMapper.updateOrderFinished(sob.getOrderId(), 0, 2, new Date());
-                                        sellOrderBookMapper.deleteByPrimaryKey(sob.getSobId());
-                                        buyOrderBookMapper.deleteByOrderId(order.getOrderId());
-                                        flag = 1;
-                                        isTrade = 1;
-                                    } else {
-                                        tradeQty = sob.getAskSize();
-                                        ordersMapper.updateOrderFinished(order.getOrderId(), order.getRemainQty() - sob.getAskSize(), 1, new Date());
-                                        ordersMapper.updateOrderFinished(sob.getOrderId(), 0, 2, new Date());
-                                        sellOrderBookMapper.deleteByPrimaryKey(sob.getSobId());
-                                        buyOrderBookMapper.updateBuySizeByOrderId(order.getRemainQty() - sob.getAskSize(), order.getOrderId());
-                                        order.setRemainQty(order.getRemainQty() - sob.getAskSize());
-                                        isTrade = 1;
-                                    }
-                                }
-                                if (isTrade == 1) {
-                                    Trade trade = new Trade();
-                                    trade.setUserId(order.getUserId());
-                                    trade.setStockId(stockId);
-                                    trade.setBuyOrderId(order.getOrderId());
-                                    trade.setSellOrderId(sob.getOrderId());
-                                    trade.setPrice(sob.getAskPrice());
-                                    trade.setQty(tradeQty);
-                                    trade.setTradeDate(new Date());
-                                    tradeMapper.insert(trade);
-                                }
-                                if (flag == 1) {
-                                    order = null;
                                 }
                             }else{
-                                order=null;
-                            }
-                        } else {
-                            //sell orders
-                            //matching for sell order
-                            BuyOrderBook bob = buyOrderBookMapper.selectMaxCurrentPrice(stockId);
-                            if(bob!=null) {
-                                if (order.getFullOrKill() == 1) {
-                                    //require Fill or Kill
-                                    //if qty is OK
-                                    tradeQty = order.getRemainQty();
-                                    if (order.getRemainQty() < bob.getBuySize()) {
-                                        //deal. Update order status and order book. insert this order to trade table
-                                        ordersMapper.updateOrderFinished(order.getOrderId(), 0, 2, new Date());
-                                        ordersMapper.updateOrderFinished(bob.getOrderId(), bob.getBuySize() - order.getRemainQty(), 1, new Date());
-                                        buyOrderBookMapper.updateBuySize(bob.getBuySize() - order.getRemainQty(), bob.getBobId());
-                                        sellOrderBookMapper.deleteByOrderId(order.getOrderId());
-                                        flag = 1;
-                                        isTrade = 1;
-                                    } else if (order.getRemainQty() == bob.getBuySize()) {
-                                        ordersMapper.updateOrderFinished(order.getOrderId(), 0, 2, new Date());
-                                        ordersMapper.updateOrderFinished(bob.getOrderId(), 0, 2, new Date());
-                                        buyOrderBookMapper.deleteByPrimaryKey(bob.getBobId());
-                                        sellOrderBookMapper.deleteByOrderId(order.getOrderId());
-                                        flag = 1;
-                                        isTrade = 1;
+                                //market order is sell
+                                BuyOrderBook bob = buyOrderBookMapper.selectMaxCurrentPrice(stockId);
+                                if (bob != null) {
+                                    Orders buyOrder = ordersMapper.selectByPrimaryKey(bob.getOrderId());
+                                    Orders sellOrder = marketOrder;
+                                    if (buyOrder.getFullOrKill() == 1 && buyOrder.getRemainQty() > sellOrder.getRemainQty() ||
+                                            sellOrder.getFullOrKill() == 1 && sellOrder.getRemainQty() > buyOrder.getRemainQty()) {
+                                        //Full of Kill is not meet
+                                        System.out.println("The order of Full or Kill can't matching");
                                     } else {
-                                        //not matching
-                                        flag = 1;
-                                    }
-                                } else {
-                                    //not require FOK
-                                    if (order.getRemainQty() < bob.getBuySize()) {
-                                        tradeQty = order.getRemainQty();
-                                        ordersMapper.updateOrderFinished(order.getOrderId(), 0, 2, new Date());
-                                        ordersMapper.updateOrderFinished(bob.getOrderId(), bob.getBuySize() - order.getRemainQty(), 1, new Date());
-                                        buyOrderBookMapper.updateBuySize(bob.getBuySize() - order.getRemainQty(), bob.getBobId());
-                                        sellOrderBookMapper.deleteByOrderId(order.getOrderId());
-                                        flag = 1;
-                                        isTrade = 1;
-                                    } else if (order.getRemainQty() == bob.getBuySize()) {
-                                        tradeQty = order.getRemainQty();
-                                        ordersMapper.updateOrderFinished(order.getOrderId(), 0, 2, new Date());
-                                        ordersMapper.updateOrderFinished(bob.getOrderId(), 0, 2, new Date());
-                                        buyOrderBookMapper.deleteByPrimaryKey(bob.getBobId());
-                                        sellOrderBookMapper.deleteByOrderId(order.getOrderId());
-                                        flag = 1;
-                                        isTrade = 1;
-                                    } else {
-                                        tradeQty = bob.getBuySize();
-                                        ordersMapper.updateOrderFinished(order.getOrderId(), order.getRemainQty() - bob.getBuySize(), 1, new Date());
-                                        ordersMapper.updateOrderFinished(bob.getOrderId(), 0, 2, new Date());
-                                        sellOrderBookMapper.updateSellSizeByOrderId(order.getRemainQty() - bob.getBuySize(), order.getOrderId());
-                                        order.setRemainQty(order.getRemainQty() - bob.getBuySize());
-                                        buyOrderBookMapper.deleteByPrimaryKey(bob.getBobId());
-                                        isTrade = 1;
+                                        //the orders matching
+                                        int tradeQty = 0;
+                                        if (buyOrder.getRemainQty() < sellOrder.getRemainQty()) {
+                                            tradeQty = buyOrder.getRemainQty();
+                                            ordersMapper.updateOrderFinished(buyOrder.getOrderId(), 0, 2, new Date());
+                                            ordersMapper.updateOrderFinished(sellOrder.getOrderId(), sellOrder.getRemainQty() - buyOrder.getRemainQty(), 1, new Date());
+                                            buyOrderBookMapper.deleteByOrderId(buyOrder.getOrderId());
+                                            marketOrder.setRemainQty(sellOrder.getRemainQty() - buyOrder.getRemainQty());
+                                            flag=1;
+                                        } else if (buyOrder.getRemainQty() == sellOrder.getRemainQty()) {
+                                            tradeQty = buyOrder.getRemainQty();
+                                            ordersMapper.updateOrderFinished(buyOrder.getOrderId(), 0, 2, new Date());
+                                            ordersMapper.updateOrderFinished(sellOrder.getOrderId(), 0, 2, new Date());
+                                            buyOrderBookMapper.deleteByOrderId(buyOrder.getOrderId());
+                                        } else {
+                                            tradeQty = sellOrder.getRemainQty();
+                                            ordersMapper.updateOrderFinished(buyOrder.getOrderId(), buyOrder.getRemainQty() - sellOrder.getRemainQty(), 1, new Date());
+                                            ordersMapper.updateOrderFinished(sellOrder.getOrderId(), 0, 2, new Date());
+                                            buyOrderBookMapper.updateBuySizeByOrderId(buyOrder.getRemainQty() - sellOrder.getRemainQty(),buyOrder.getOrderId());
+                                        }
+                                        //insert into trade table
+                                        Trade trade = new Trade();
+                                        trade.setUserId(buyOrder.getUserId());
+                                        trade.setStockId(stockId);
+                                        trade.setBuyOrderId(buyOrder.getOrderId());
+                                        trade.setSellOrderId(sellOrder.getOrderId());
+                                        trade.setPrice(buyOrder.getPrice());
+                                        trade.setQty(tradeQty);
+                                        trade.setTradeDate(new Date());
+                                        tradeMapper.insert(trade);
+                                        if(flag==0){
+                                            marketOrder=null;
+                                        }
                                     }
                                 }
-                                if (isTrade == 1) {
-                                    Trade trade = new Trade();
-                                    Orders od = ordersMapper.selectByPrimaryKey(bob.getOrderId());
-                                    trade.setUserId(od.getUserId());
-                                    trade.setStockId(stockId);
-                                    trade.setBuyOrderId(bob.getOrderId());
-                                    trade.setSellOrderId(order.getOrderId());
-                                    trade.setPrice(bob.getBuyPrice());
-                                    trade.setQty(tradeQty);
-                                    trade.setTradeDate(new Date());
-                                    tradeMapper.insert(trade);
-                                }
-                                if (flag == 1) {
-                                    order = null;
-                                }
-                            }else{
-                                order=null;
                             }
                         }
                     }
                 }
-            }
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+                //Market orders has finished, next is other orders
+                BuyOrderBook bob = buyOrderBookMapper.selectMaxCurrentPrice(stockId);
+                SellOrderBook sob = sellOrderBookMapper.selectMinCurrentPrice(stockId);
+                if (bob != null && sob != null && bob.getBuyPrice() == sob.getAskPrice()) {
+                    Orders buyOrder = ordersMapper.selectByPrimaryKey(bob.getOrderId());
+                    Orders sellOrder = ordersMapper.selectByPrimaryKey(sob.getOrderId());
+                    if (buyOrder.getFullOrKill() == 1 && buyOrder.getRemainQty() > sellOrder.getRemainQty() ||
+                            sellOrder.getFullOrKill() == 1 && sellOrder.getRemainQty() > buyOrder.getRemainQty()) {
+                        //Full of Kill is not meet
+                        System.out.println("The order of Full or Kill can't matching");
+                    } else {
+                        //the orders matching
+                        int tradeQty = 0;
+                        if (buyOrder.getRemainQty() < sellOrder.getRemainQty()) {
+                            tradeQty = buyOrder.getRemainQty();
+                            ordersMapper.updateOrderFinished(buyOrder.getOrderId(), 0, 2, new Date());
+                            ordersMapper.updateOrderFinished(sellOrder.getOrderId(), sellOrder.getRemainQty() - buyOrder.getRemainQty(), 1, new Date());
+                            sellOrderBookMapper.updateSellSizeByOrderId (sellOrder.getRemainQty() - buyOrder.getRemainQty(), sellOrder.getOrderId());
+                            buyOrderBookMapper.deleteByOrderId(buyOrder.getOrderId());
+                        } else if (buyOrder.getRemainQty() == sellOrder.getRemainQty()) {
+                            tradeQty = buyOrder.getRemainQty();
+                            ordersMapper.updateOrderFinished(buyOrder.getOrderId(), 0, 2, new Date());
+                            ordersMapper.updateOrderFinished(sellOrder.getOrderId(), 0, 2, new Date());
+                            sellOrderBookMapper.deleteByOrderId(sellOrder.getOrderId());
+                            buyOrderBookMapper.deleteByOrderId(buyOrder.getOrderId());
+                        } else {
+                            tradeQty = sellOrder.getRemainQty();
+                            ordersMapper.updateOrderFinished(buyOrder.getOrderId(), buyOrder.getRemainQty() - sellOrder.getRemainQty(), 1, new Date());
+                            ordersMapper.updateOrderFinished(sellOrder.getOrderId(), 0, 2, new Date());
+                            buyOrderBookMapper.updateBuySizeByOrderId(buyOrder.getRemainQty() - sellOrder.getRemainQty(), buyOrder.getOrderId());
+                            sellOrderBookMapper.deleteByOrderId(sellOrder.getOrderId());
+                        }
+                        //insert into trade table
+                        Trade trade = new Trade();
+                        trade.setUserId(buyOrder.getUserId());
+                        trade.setStockId(stockId);
+                        trade.setBuyOrderId(buyOrder.getOrderId());
+                        trade.setSellOrderId(sellOrder.getOrderId());
+                        trade.setPrice(sellOrder.getPrice());
+                        trade.setQty(tradeQty);
+                        trade.setTradeDate(new Date());
+                        tradeMapper.insert(trade);
+                    }
+                }//price is same,do the matching end
+            }//for stock end
         }
     }
 }
