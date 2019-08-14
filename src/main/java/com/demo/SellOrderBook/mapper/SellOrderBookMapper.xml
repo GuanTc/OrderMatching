@@ -230,4 +230,8 @@
   <select id="findMinPrice" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     SELECT *  FROM sell_order_book WHERE ask_price = (SELECT MIN(ask_price) FROM sell_order_book) AND stock_id =  #{stockId,jdbcType=BIGINT}
   </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select  * from sell_order_book
+  </select>
 </mapper>

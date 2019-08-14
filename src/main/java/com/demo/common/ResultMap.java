@@ -10,7 +10,16 @@ public class ResultMap {
     final static String ERROR = "ERROR";
     private String status;
     private String msg;
-    private Object object;
+    private Object data;
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -26,7 +35,7 @@ public class ResultMap {
     public void Error(){
         this.status = this.ERROR;
     }
-    public void setObject(Object o){
-        this.object = o;
-    }
+
+
+
 }

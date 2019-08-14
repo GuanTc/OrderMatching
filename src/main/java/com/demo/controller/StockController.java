@@ -48,7 +48,7 @@ public class StockController {
         try {
             List<Stock> list = stockSercive.findAll();
             map.Success();
-            map.setObject(list);
+            map.setData(list);
         }catch (Exception e){
             map.Error();
             map.setMsg("网络异常");
@@ -63,7 +63,7 @@ public class StockController {
         try {
             List<Stock> list = stockSercive.findStockByConditions(stock);
             map.Success();
-            map.setObject(list);
+            map.setData(list);
         }catch (Exception e){
             map.Error();
             map.setMsg("网络异常");

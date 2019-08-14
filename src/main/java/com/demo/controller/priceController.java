@@ -46,7 +46,7 @@ public class priceController {
         try {
             List<Price> list = priceService.findAll();
             map.Success();
-            map.setObject(list);
+            map.setData(list);
         }catch (Exception e){
             map.Error();
             map.setMsg("网络异常");
@@ -64,7 +64,7 @@ public class priceController {
             Date enddate  = format.parse(end);
             List<Price> list = priceService.findPriceByConditions(price,startdate,enddate);
             map.Success();
-            map.setObject(list);
+            map.setData(list);
             return map;
         }catch (Exception e){
             map.Error();

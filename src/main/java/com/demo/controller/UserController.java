@@ -54,7 +54,7 @@ public class UserController {
         try {
              List<User> list = userService.findAll();
              map.Success();
-             map.setObject(list);
+             map.setData(list);
         }catch (Exception e){
             map.Error();
             map.setMsg("network anomaly");

@@ -49,10 +49,10 @@ public class BuyOrderBookController {
                System.out.println(buyOrderBooks.get(i));
            }
            map.Success();
-           map.setObject(buyOrderBooks);
+           map.setData(buyOrderBooks);
        }catch (Exception e){
            map.Error();
-           map.setMsg("网络异常");
+           map.setMsg("network anomaly");
        }
        return map;
     }
@@ -98,7 +98,7 @@ public class BuyOrderBookController {
        try {
           BuyOrderBook buyOrderBook = buyOrderBookService.findMaxPrice(stockId);
           map.Success();
-          map.setObject(buyOrderBook);
+          map.setData(buyOrderBook);
        }catch (Exception e){
            map.Error();
            map.setMsg("网络异常");

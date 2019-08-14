@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,10 +32,44 @@ public class OrderServiceImpl implements OrderService{
     @Override
     @Transactional
     public void addOrder(Orders orders) {
-        if("Day".equals(orders.getDuration())){
 
+        if("Day".equals(orders.getDuration())){
+                orders.setGtdDate(getDayTime());
+        }else if("GTC".equals(orders.getDuration())){
+                Date date = getDayTime();
+                date = addDayOfDate(date,30);
+                orders.setGtdDate(date);
         }
+
         ordersMapper.insert(orders);
+    }
+
+
+    public static Date addDayOfDate(Date date,int i){
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, i);
+        Date newDate = c.getTime();
+        return newDate;
+    }
+
+    public  static Date getDayTime(){
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);//获取年份
+        int month=cal.get(Calendar.MONTH)+1;//获取月份
+        int day=cal.get(Calendar.DATE);//获取日
+        int hour = 15;
+        String minute = "00";
+        String second = "00";
+        String str = ""+ year + "-"+month+"-"+day+" "+hour+":"+minute+":"+second;
+        System.out.println(str);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date dat = format.parse(str);
+           return dat;
+        }catch (Exception e){
+            return null;
+        }
     }
 
     @Override

@@ -56,15 +56,14 @@ public class OrderController {
         try {
             List<Orders> list = orderService.findAll();
             map.Success();
-            map.setObject(list);
-            for (int i=0;i<list.size();i++){
-                System.out.println(list.get(i));
-            }
+            map.setData(list);
+
         }catch (Exception e){
             map.Error();
             map.setMsg("网络异常");
 
         }
+        System.out.println(map);
         return  map;
     }
 
@@ -84,7 +83,7 @@ public class OrderController {
             enddate = format.parse(end);
             List<Orders> list = orderService.findOrdersByCondition(orders,startdate,enddate);
             map.Success();
-            map.setObject(list);
+            map.setData(list);
         }catch (Exception e){
             map.Error();
             map.setMsg("网络异常");

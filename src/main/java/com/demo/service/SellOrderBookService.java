@@ -2,6 +2,8 @@ package com.demo.service;
 
 import com.demo.SellOrderBook.pojo.SellOrderBook;
 
+import java.util.List;
+
 /**
  * @author: WANGSHUAIYI
  * @date : 2019/8/12
@@ -33,4 +35,10 @@ public interface SellOrderBookService {
      * @param sellOrderBook
      */
     void updateSellOrderBook(SellOrderBook sellOrderBook);
+
+    /**
+     * 查找全部
+     * @return
+     */
+    List<SellOrderBook> findAll();
 }

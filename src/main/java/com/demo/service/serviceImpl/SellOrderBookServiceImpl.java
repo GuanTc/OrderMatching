@@ -42,4 +42,9 @@ public class SellOrderBookServiceImpl implements SellOrderBookService {
     public void updateSellOrderBook(SellOrderBook sellOrderBook) {
         sellOrderBookMapper.updateByPrimaryKey(sellOrderBook);
     }
+
+    @Override
+    public List<SellOrderBook> findAll() {
+        return sellOrderBookMapper.findAll();
+    }
 }
