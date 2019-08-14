@@ -33,5 +33,11 @@ public interface OrderService {
      */
     List<Orders> findOrdersByCondition(Orders orders, Date startdate,Date enddate);
 
+    /**
+     * 查询所有已经提交没有完成的。
+     * @return
+     */
+    List<Orders> findOrdersByStatis();
 
+    void updateOrder(Orders orders);
 }

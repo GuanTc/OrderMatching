@@ -15,21 +15,12 @@
     <input type="text" placeholder="userId" name="userId" />
     <input type="text" placeholder="stockId" name="stockId"/>
     <input type="text" placeholder="price" name="price" />
+    <input type="text" placeholder="type" name="type" />
     <input type="text" placeholder="qty" name="qty" />
-    <input type="text" placeholder="remainQty" name="remainQty" />
     <input type="text" placeholder="orderType" name="orderType" />
-    <input type="text" placeholder="marketPrice" name="marketPrice" />
-    <input type="text" placeholder="limitPrice" name="limitPrice" />
-    <input type="text" placeholder="triggerPrice" name="triggerPrice" />
-    <input type="text" placeholder="stopPrice" name="stopPrice" />
     <input type="text" placeholder="fullOrKill" name="fullOrKill" />
     <input type="text" placeholder="duration" name="duration" />
-    <input type="text" placeholder="gtdDate" name="gtdDate" />
-    <input type="text" placeholder="minute" name="minute" />
-    <input type="text" placeholder="submitDate" name="submitDate" />
-    <input type="text" placeholder="status" name="status" />
-    <input type="text" placeholder="sendOutDate" name="sendOutDate" />
-    <input type="text" placeholder="finalDate" name="finalDate" />
+
     <button type="submit" value="add" name="add">add</button>
 </form>
 

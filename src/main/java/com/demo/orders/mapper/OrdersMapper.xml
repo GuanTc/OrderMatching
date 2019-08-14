@@ -116,7 +116,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.demo.orders.pojo.Orders" >
+  <insert id="insert" parameterType="com.demo.orders.pojo.Orders"  useGeneratedKeys="true" keyProperty="orderId">
     insert into orders (order_id, user_id, stock_id, 
       type, price, qty, remain_qty, 
       order_type, market_price, limit_price, 

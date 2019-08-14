@@ -2,6 +2,7 @@ package com.demo.service.serviceImpl;
 
 import com.demo.BuyOrderBook.mapper.BuyOrderBookMapper;
 import com.demo.BuyOrderBook.pojo.BuyOrderBook;
+import com.demo.BuyOrderBook.pojo.BuyOrderBookExample;
 import com.demo.service.BuyOrderBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,9 @@ public class BuyOrderBookServiceImpl implements BuyOrderBookService{
     @Override
     @Transactional
     public void deleteBuyOrder(Long Bob) {
-        buyOrderBookMapper.deleteByPrimaryKey(Bob);
+        BuyOrderBookExample example = new BuyOrderBookExample();
+        BuyOrderBookExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderIdEqualTo(Bob);
+        buyOrderBookMapper.deleteByExample(example);
     }
 }

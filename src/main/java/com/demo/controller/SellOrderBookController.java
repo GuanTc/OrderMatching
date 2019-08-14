@@ -6,6 +6,7 @@ import com.demo.service.SellOrderBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class SellOrderBookController {
     private SellOrderBookService sellOrderBookService;
 
     @RequestMapping("/findAll")
+    @ResponseBody
     public ResultMap findAll(){
         ResultMap map = new ResultMap();
 
@@ -31,7 +33,6 @@ public class SellOrderBookController {
         }catch (Exception e){
             map.Error();
         }
-
         return map;
     }
 

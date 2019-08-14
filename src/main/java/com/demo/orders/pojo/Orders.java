@@ -35,7 +35,7 @@ public class Orders {
 
     private Integer minute;
 
-    private Date submitDate;
+    private Date submitDate = new Date();
 
 
 
