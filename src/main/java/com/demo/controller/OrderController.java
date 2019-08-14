@@ -1,5 +1,6 @@
 package com.demo.controller;
 
+import com.demo.common.OrderVo;
 import com.demo.common.ResultMap;
 import com.demo.orders.pojo.Orders;
 import com.demo.service.OrderService;
@@ -67,6 +68,20 @@ public class OrderController {
         }
         System.out.println(map);
         return  map;
+    }
+
+    @RequestMapping("/findAllUser")
+    @ResponseBody
+    private ResultMap findAllUser(){
+      ResultMap map = new ResultMap();
+        try {
+            List<OrderVo> orderVos = orderService.findAllUser();
+            map.Success();
+            map.setData(orderVos);
+        }catch (Exception e){
+            map.Error();
+        }
+        return map;
     }
 
 

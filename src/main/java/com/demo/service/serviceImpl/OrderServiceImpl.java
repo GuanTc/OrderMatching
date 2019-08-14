@@ -4,6 +4,7 @@ import com.demo.BuyOrderBook.mapper.BuyOrderBookMapper;
 import com.demo.BuyOrderBook.pojo.BuyOrderBook;
 import com.demo.SellOrderBook.mapper.SellOrderBookMapper;
 import com.demo.SellOrderBook.pojo.SellOrderBook;
+import com.demo.common.OrderVo;
 import com.demo.orders.mapper.OrdersMapper;
 import com.demo.orders.pojo.Orders;
 import com.demo.orders.pojo.OrdersExample;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -159,5 +161,18 @@ public class OrderServiceImpl implements OrderService{
     @Transactional
     public void updateOrder(Orders orders) {
         ordersMapper.updateByPrimaryKey(orders);
+    }
+
+    @Override
+    public List<OrderVo> findAllUser() {
+       List<Orders> list = ordersMapper.findAll();
+       List<OrderVo> result = new ArrayList<>();
+       for(int i =0;i<list.size();i++){
+           OrderVo vo = new OrderVo();
+           vo.setUserId(list.get(i).getUserId());
+            vo.setUserName(userMapper.selectByPrimaryKey(list.get(i).getUserId()).getName());
+            result.add(vo);
+       }
+        return result;
     }
 }
