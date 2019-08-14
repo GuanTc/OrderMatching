@@ -6,18 +6,46 @@ public class Trade {
     private Long tradeId;
 
     private Long userId;
-
+    private String buyname;
     private Long stockId;
 
     private Long buyOrderId;
 
     private Long sellOrderId;
 
+    private String sellname;
+
+    private String stockName;
+
     private Float price;
 
     private Integer qty;
 
     private Date tradeDate;
+
+    public String getBuyname() {
+        return buyname;
+    }
+
+    public void setBuyname(String buyname) {
+        this.buyname = buyname;
+    }
+
+    public String getSellname() {
+        return sellname;
+    }
+
+    public void setSellname(String sellname) {
+        this.sellname = sellname;
+    }
+
+    public String getStockName() {
+        return stockName;
+    }
+
+    public void setStockName(String stockName) {
+        this.stockName = stockName;
+    }
 
     public Long getTradeId() {
         return tradeId;

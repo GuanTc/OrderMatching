@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     @Transactional
-    public void addOrder(@RequestBody Orders orders) {
+    public void addOrder( Orders orders) {
 
         if("Day".equals(orders.getDuration())){
                // orders.setGtdDate(getDayTime());
