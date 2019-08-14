@@ -1,12 +1,16 @@
 package com.demo.schedul;
 
+import com.demo.WebSocket.MyWebSocket;
+import com.demo.common.ResultMap;
 import com.demo.orders.pojo.Orders;
 import com.demo.service.BuyOrderBookService;
 import com.demo.service.OrderService;
 import com.demo.service.SellOrderBookService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +44,7 @@ public class Schedul {
         for(int i = 0; i < orders.size(); i++){
             Orders o = orders.get(i);
             logger.info("现在时间：{}",dataFromat.format(new Date())+"        order的截止日期是："+o.getGtdDate());
-               if(currentDate.after(o.getGtdDate())){
+               if(currentDate.before(o.getGtdDate())){
                    logger.info("修改状态");
                    o.setStatus(4);
                    orderService.updateOrder(o);
@@ -53,6 +57,19 @@ public class Schedul {
            }
 
         }
+        String s = format.format(new Date());
+        JSONObject jsonObject = new JSONObject();
+       try {
+           jsonObject.put("status", "SUCCESS");
+           jsonObject.put("data",sellOrderBookService.findAll());
+           jsonObject.put("msg","Sell");
+           MyWebSocket.sendInfo(jsonObject.toString());
+           jsonObject.put("msg","Buy");
+           jsonObject.put("data",buyOrderBookService.findAll());
+           MyWebSocket.sendInfo(jsonObject.toString());
+       }catch (Exception e){
+
+       }
 
     }
 }

@@ -5,9 +5,9 @@ import com.demo.common.ResultMap;
 import com.demo.service.BuyOrderBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class BuyOrderBookController {
 
    @RequestMapping("/add")
    @ResponseBody
-   public ResultMap addBuyOrderBook(BuyOrderBook buyOrderBook){
+   public ResultMap addBuyOrderBook(@RequestBody BuyOrderBook buyOrderBook){
        ResultMap map = new ResultMap();
        try{
            buyOrderBookService.addBuyOrder(buyOrderBook);
@@ -59,7 +59,7 @@ public class BuyOrderBookController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public ResultMap updateOrder(BuyOrderBook buyOrderBook){
+    public ResultMap updateOrder(@RequestBody BuyOrderBook buyOrderBook){
        ResultMap map = new ResultMap();
        try {
            buyOrderBookService.updateBuyOrderBook(buyOrderBook);
@@ -78,7 +78,7 @@ public class BuyOrderBookController {
 
    @RequestMapping("/delete")
    @ResponseBody
-    public ResultMap delete(Long bobId){
+    public ResultMap delete(@RequestBody Long bobId){
         ResultMap map = new ResultMap();
        try {
            buyOrderBookService.deleteBuyOrder(bobId);
@@ -93,7 +93,7 @@ public class BuyOrderBookController {
 
    @RequestMapping("/findMaxPrice")
    @ResponseBody
-    public ResultMap findMaxPrice(Long stockId){
+    public ResultMap findMaxPrice(@RequestBody Long stockId){
        ResultMap map = new ResultMap();
        try {
           BuyOrderBook buyOrderBook = buyOrderBookService.findMaxPrice(stockId);

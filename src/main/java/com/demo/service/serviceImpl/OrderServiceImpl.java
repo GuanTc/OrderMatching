@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,13 +41,16 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     @Transactional
-    public void addOrder(Orders orders) {
+    public void addOrder(@RequestBody Orders orders) {
 
         if("Day".equals(orders.getDuration())){
-                orders.setGtdDate(getDayTime());
+               // orders.setGtdDate(getDayTime());
+            Date date = getDayTime();
+            date = addDayOfDate(date,10);
+            orders.setGtdDate(date);
         }else if("GTC".equals(orders.getDuration())){
                 Date date = getDayTime();
-                date = addDayOfDate(date,3);
+                date = addDayOfDate(date,5);
                 orders.setGtdDate(date);
         }
         orders.setStatus(1);
@@ -90,7 +94,7 @@ public class OrderServiceImpl implements OrderService{
         int month=cal.get(Calendar.MONTH)+1;//获取月份
         int day=cal.get(Calendar.DATE);//获取日
         int hour=cal.get(Calendar.HOUR);
-        int minute=cal.get(Calendar.MINUTE)+5;
+        int minute=cal.get(Calendar.MINUTE);
         // int hour = 15;
        // String minute = "00";
         String second = "00";

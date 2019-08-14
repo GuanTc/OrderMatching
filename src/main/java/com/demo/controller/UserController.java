@@ -106,7 +106,7 @@ public class UserController {
     }
     @RequestMapping("/toAdd")
     public  String toAdd(){
-        return "add_user";
+        return "index";
     }
 
 

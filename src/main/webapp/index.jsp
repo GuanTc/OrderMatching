@@ -6,20 +6,69 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE HTML>
 <html>
 <head>
+    <title>My WebSocket</title>
 </head>
+
 <body>
-<form id="register" action="${pageContext.request.contextPath }/user/update" method="post">
-    <input type="text" placeholder="userId" name="userId" />
-    <input type="text" placeholder="username" name="username" />
-    <input type="text" placeholder="password" name="password" />
-    <input type="text" placeholder="name" name="name" />
-    <button type="submit" value="确认修改" name="确认修改">确认修改</button>
-</form>
-
-
-
-index
+Welcome<br/>
+<input id="text" type="text" /><button onclick="send()">Send</button>    <button onclick="closeWebSocket()">Close</button>
+<div id="message">
+</div>
 </body>
+
+<script type="text/javascript">
+    var websocket = null;
+
+    //判断当前浏览器是否支持WebSocket
+    if('WebSocket' in window){
+        websocket = new WebSocket("ws://localhost:8080/websocket");
+    }
+    else{
+        alert('Not support websocket')
+    }
+
+    //连接发生错误的回调方法
+    websocket.onerror = function(){
+        setMessageInnerHTML("error");
+    };
+
+    //连接成功建立的回调方法
+    websocket.onopen = function(event){
+        setMessageInnerHTML("open");
+    }
+
+    //接收到消息的回调方法
+    websocket.onmessage = function(event){
+        setMessageInnerHTML(event.data);
+    }
+
+    //连接关闭的回调方法
+    websocket.onclose = function(){
+        setMessageInnerHTML("close");
+    }
+
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function(){
+        websocket.close();
+    }
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML){
+        document.getElementById('message').innerHTML += innerHTML + '<br/>';
+    }
+
+    //关闭连接
+    function closeWebSocket(){
+        websocket.close();
+    }
+
+    //发送消息
+    function send(){
+        var message = document.getElementById('text').value;
+        websocket.send(message);
+    }
+</script>
 </html>

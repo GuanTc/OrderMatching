@@ -7,6 +7,7 @@ import com.demo.service.UserService;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,7 +31,7 @@ public class OrderController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public ResultMap AddOrder(Orders orders){
+    public ResultMap AddOrder(@RequestBody Orders orders){
         ResultMap map = new ResultMap();
         try {
             orderService.addOrder(orders);
@@ -70,7 +71,7 @@ public class OrderController {
 
     @RequestMapping("/findOrdersByCondition")
     @ResponseBody
-    public ResultMap findOrdersByCondition(Orders orders, String start, String end){
+    public ResultMap findOrdersByCondition(@RequestBody Orders orders,@RequestBody String start,@RequestBody String end){
         System.out.println(orders);
         System.out.println("strat:"+start);
         System.out.println("end:"+end);
