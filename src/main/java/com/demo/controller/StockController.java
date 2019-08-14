@@ -4,6 +4,7 @@ import com.demo.common.ResultMap;
 import com.demo.service.StockSercive;
 import com.demo.stock.pojo.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,6 +54,25 @@ public class StockController {
             map.Error();
             map.setMsg("网络异常");
         }
+        return map;
+    }
+
+
+    @RequestMapping("/findAllStock")
+    @ResponseBody
+    public ResultMap findAllStock(){
+       ResultMap map = new ResultMap();
+       try {
+           List<Stock> list = stockSercive.findAll();
+           JSONObject jsonObject =new JSONObject();
+           for(int i=0;i<list.size();i++){
+               jsonObject.put(list.get(i).getStockCode(),list.get(i).getStockName());
+           }
+           map.Success();
+           map.setData(jsonObject);
+       }catch (Exception e){
+           map.Error();
+       }
         return map;
     }
 

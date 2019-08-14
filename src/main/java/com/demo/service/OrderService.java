@@ -1,6 +1,7 @@
 package com.demo.service;
 
 import com.demo.orders.pojo.Orders;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 import java.util.Date;
 import java.util.List;
@@ -41,5 +42,5 @@ public interface OrderService {
 
     void updateOrder(Orders orders);
 
-    String findAllUser();
+    JSONObject findAllUser();
 }

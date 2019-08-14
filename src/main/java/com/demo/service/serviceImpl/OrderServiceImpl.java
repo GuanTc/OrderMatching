@@ -161,7 +161,7 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public String findAllUser()  {
+    public JSONObject findAllUser()  {
        List<Orders> list = ordersMapper.findAll();
        JSONObject jsonObject = new JSONObject();
      try {
@@ -173,6 +173,6 @@ public class OrderServiceImpl implements OrderService{
      }catch (Exception e){
 
      }
-        return jsonObject.toString();
+        return jsonObject;
     }
 }

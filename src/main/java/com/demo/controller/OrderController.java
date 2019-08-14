@@ -4,6 +4,7 @@ import com.demo.common.ResultMap;
 import com.demo.orders.pojo.Orders;
 import com.demo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,7 +73,7 @@ public class OrderController {
       ResultMap map = new ResultMap();
 
       try {
-            String s = orderService.findAllUser();
+            JSONObject s = orderService.findAllUser();
             map.Success();
             map.setData(s);
         }catch (Exception e){
