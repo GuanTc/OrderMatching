@@ -8,6 +8,7 @@ import com.demo.orders.mapper.OrdersMapper;
 import com.demo.orders.pojo.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -25,6 +26,7 @@ public class MonitorOrders {
 
     @Async
     public void monitor(){
+        System.out.println("Test monitor");
         while(true) {
             List<Orders> orderList = ordersMapper.selectByStatus(0);
             for (int i = 0; i <orderList.size() ; i++) {
@@ -84,7 +86,6 @@ public class MonitorOrders {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
     }
 }

@@ -33,8 +33,6 @@ public class Matching {
 
     @Async
     public void match() {
-        //each time handling 20 rows
-        int rows = 20;
         while (true) {
             //Get all stocks from stock table
             List<Stock> stockList = stockMapper.selectList();
@@ -58,7 +56,9 @@ public class Matching {
                                             sellOrder.getFullOrKill() == 1 && sellOrder.getRemainQty() > buyOrder.getRemainQty()) {
                                         //Full of Kill is not meet
                                         System.out.println("The order of Full or Kill can't matching");
-                                    } else {
+                                    } else if(buyOrder.getUserId()==sellOrder.getUserId()) {
+                                        System.out.println("Buy and Sell is the same person");
+                                    }else{
                                         //the orders matching
                                         int tradeQty = 0;
                                         if (buyOrder.getRemainQty() < sellOrder.getRemainQty()) {
@@ -89,9 +89,9 @@ public class Matching {
                                         trade.setQty(tradeQty);
                                         trade.setTradeDate(new Date());
                                         tradeMapper.insert(trade);
-                                        if(flag==0){
-                                            marketOrder=null;
-                                        }
+                                    }
+                                    if(flag==0){
+                                        marketOrder=null;
                                     }
                                 }
                             }else{
@@ -104,7 +104,9 @@ public class Matching {
                                             sellOrder.getFullOrKill() == 1 && sellOrder.getRemainQty() > buyOrder.getRemainQty()) {
                                         //Full of Kill is not meet
                                         System.out.println("The order of Full or Kill can't matching");
-                                    } else {
+                                    } else if(buyOrder.getUserId()==sellOrder.getUserId()) {
+                                        System.out.println("Buy and Sell is the same person");
+                                    }else{
                                         //the orders matching
                                         int tradeQty = 0;
                                         if (buyOrder.getRemainQty() < sellOrder.getRemainQty()) {
@@ -135,9 +137,9 @@ public class Matching {
                                         trade.setQty(tradeQty);
                                         trade.setTradeDate(new Date());
                                         tradeMapper.insert(trade);
-                                        if(flag==0){
-                                            marketOrder=null;
-                                        }
+                                    }
+                                    if(flag==0){
+                                        marketOrder=null;
                                     }
                                 }
                             }
@@ -147,14 +149,16 @@ public class Matching {
                 //Market orders has finished, next is other orders
                 BuyOrderBook bob = buyOrderBookMapper.selectMaxCurrentPrice(stockId);
                 SellOrderBook sob = sellOrderBookMapper.selectMinCurrentPrice(stockId);
-                if (bob != null && sob != null && bob.getBuyPrice() == sob.getAskPrice()) {
+                if (bob != null && sob != null && Math.abs(bob.getBuyPrice()-sob.getAskPrice())<0.00000001) {
                     Orders buyOrder = ordersMapper.selectByPrimaryKey(bob.getOrderId());
                     Orders sellOrder = ordersMapper.selectByPrimaryKey(sob.getOrderId());
                     if (buyOrder.getFullOrKill() == 1 && buyOrder.getRemainQty() > sellOrder.getRemainQty() ||
                             sellOrder.getFullOrKill() == 1 && sellOrder.getRemainQty() > buyOrder.getRemainQty()) {
                         //Full of Kill is not meet
                         System.out.println("The order of Full or Kill can't matching");
-                    } else {
+                    } else if(buyOrder.getUserId()==sellOrder.getUserId()) {
+                        System.out.println("Buy and Sell is the same person");
+                    }else {
                         //the orders matching
                         int tradeQty = 0;
                         if (buyOrder.getRemainQty() < sellOrder.getRemainQty()) {
@@ -189,6 +193,11 @@ public class Matching {
                     }
                 }//price is same,do the matching end
             }//for stock end
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
