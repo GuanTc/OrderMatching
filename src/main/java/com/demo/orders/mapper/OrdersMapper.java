@@ -32,13 +32,15 @@ public interface OrdersMapper {
 
     int updateByPrimaryKey(Orders record);
 
-    List<Long> getOrderIdListLimit(@Param("rows")int rows, @Param("stockId")Long stockId);
-
     void updateOrderFinished(@Param("orderId")Long orderId, @Param("qty")int qty, @Param("i")int i, @Param("date")Date date);
 
-    Orders selectByPrimaryKeyAndStatus(Long orderId);
+    List<Orders> selectByStatus(int status);
 
     List<Orders> getOrderNotTrade(@Param("stockId")Long stockId, @Param("orderType")String orderType);
 
     List<Orders> findAll();
+
+    void modifySendOut(@Param("orderId")Long orderId, @Param("orderType")String orderType, @Param("status")int status, @Param("date")Date date);
+
+    void modifyLMTSendOut(@Param("orderId")Long orderId, @Param("orderType")String orderType, @Param("status")int status, @Param("limitPrice")Float limitPrice, @Param("date")Date date);
 }

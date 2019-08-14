@@ -446,19 +446,15 @@
     where order_id = #{orderId,jdbcType=BIGINT}
   </update>
 
-  <select id="getOrderIdListLimit" resultType="java.lang.Long">
-    select * from orders where stock_id=#{stockId,jdbcType=BIGINT} and status=1 limit 0,#{rows,jdbcType=INTEGER}
-  </select>
-
   <update id="updateOrderFinished">
     update orders set remain_qty=#{qty,jdbcType=INTEGER},status=#{i,jdbcType=INTEGER},final_date=#{date,jdbcType=TIMESTAMP} where order_id=#{orderId,jdbcType=BIGINT}
   </update>
 
-  <select id="selectByPrimaryKeyAndStatus" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByStatus" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from orders
-    where order_id = #{orderId,jdbcType=BIGINT} and status=1
+    where status = #{status,jdbcType=INTEGER}
   </select>
 
   <select id="getOrderNotTrade" resultMap="BaseResultMap">
@@ -468,4 +464,14 @@
   <select id="findAll" resultMap="BaseResultMap">
     select * from orders;
   </select>
+
+  <update id="modifySendOut">
+    update orders set order_type=#{orderType,jdbcType=VARCHAR},status=#{status,jdbcType=INTEGER},
+    send_out_date=#{date,jdbcType=TIMESTAMP} where order_id=#{orderId,jdbcType=BIGINT}
+  </update>
+
+  <update id="modifyLMTSendOut">
+    update orders set order_type=#{orderType,jdbcType=VARCHAR},status=#{status,jdbcType=INTEGER},price = #{limitPrice,jdbcType=REAL},
+    send_out_date=#{date,jdbcType=TIMESTAMP} where order_id=#{orderId,jdbcType=BIGINT}
+  </update>
 </mapper>
