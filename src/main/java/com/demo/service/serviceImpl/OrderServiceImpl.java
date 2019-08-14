@@ -30,6 +30,9 @@ public class OrderServiceImpl implements OrderService{
     @Override
     @Transactional
     public void addOrder(Orders orders) {
+        if("Day".equals(orders.getDuration())){
+
+        }
         ordersMapper.insert(orders);
     }
 
@@ -38,7 +41,7 @@ public class OrderServiceImpl implements OrderService{
 
        List<Orders> list =  ordersMapper.findAll();
         for (int i=0;i<list.size();i++){
-            list.get(i).setUsername(userMapper.selectByPrimaryKey( list.get(i).getUserId()).getUsername());
+            list.get(i).setUserName(userMapper.selectByPrimaryKey( list.get(i).getUserId()).getUsername());
             list.get(i).setStockName(stockMapper.selectByPrimaryKey(list.get(i).getStockId()).getStockName());
 
         }

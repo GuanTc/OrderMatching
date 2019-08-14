@@ -464,4 +464,8 @@
   <select id="getOrderNotTrade" resultMap="BaseResultMap">
     select * from orders where stock_id=#{stockId,jdbcType=BIGINT} and order_type=#{orderType,jdbcType=VARCHAR} and status=1
   </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select * from orders;
+  </select>
 </mapper>

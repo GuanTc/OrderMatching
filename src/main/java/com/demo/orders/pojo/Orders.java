@@ -45,15 +45,15 @@ public class Orders {
 
     private Date finalDate;
 
-    private String username;
+    private String userName;
     private String stockName;
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getStockName() {
@@ -224,7 +224,6 @@ public class Orders {
         this.finalDate = finalDate;
     }
 
-
     @Override
     public String toString() {
         return "Orders{" +
@@ -248,6 +247,8 @@ public class Orders {
                 ", status=" + status +
                 ", sendOutDate=" + sendOutDate +
                 ", finalDate=" + finalDate +
+                ", username='" + userName + '\'' +
+                ", stockName='" + stockName + '\'' +
                 '}';
     }
 }
