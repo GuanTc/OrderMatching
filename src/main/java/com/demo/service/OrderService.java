@@ -1,6 +1,5 @@
 package com.demo.service;
 
-import com.demo.common.OrderVo;
 import com.demo.orders.pojo.Orders;
 
 import java.util.Date;
@@ -42,5 +41,5 @@ public interface OrderService {
 
     void updateOrder(Orders orders);
 
-    List<OrderVo> findAllUser();
+    String findAllUser();
 }

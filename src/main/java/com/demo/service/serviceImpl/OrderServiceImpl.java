@@ -4,7 +4,6 @@ import com.demo.BuyOrderBook.mapper.BuyOrderBookMapper;
 import com.demo.BuyOrderBook.pojo.BuyOrderBook;
 import com.demo.SellOrderBook.mapper.SellOrderBookMapper;
 import com.demo.SellOrderBook.pojo.SellOrderBook;
-import com.demo.common.OrderVo;
 import com.demo.orders.mapper.OrdersMapper;
 import com.demo.orders.pojo.Orders;
 import com.demo.orders.pojo.OrdersExample;
@@ -12,13 +11,11 @@ import com.demo.service.OrderService;
 import com.demo.stock.mapper.StockMapper;
 import com.demo.user.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -164,15 +161,18 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public List<OrderVo> findAllUser() {
+    public String findAllUser()  {
        List<Orders> list = ordersMapper.findAll();
-       List<OrderVo> result = new ArrayList<>();
-       for(int i =0;i<list.size();i++){
-           OrderVo vo = new OrderVo();
-           vo.setUserId(list.get(i).getUserId());
-            vo.setUserName(userMapper.selectByPrimaryKey(list.get(i).getUserId()).getName());
-            result.add(vo);
-       }
-        return result;
+       JSONObject jsonObject = new JSONObject();
+     try {
+         for(int i =0;i<list.size();i++){
+             String id = list.get(i).getUserId()+"";
+             String name= userMapper.selectByPrimaryKey(list.get(i).getUserId()).getName();
+             jsonObject.put(id,name);
+         }
+     }catch (Exception e){
+
+     }
+        return jsonObject.toString();
     }
 }

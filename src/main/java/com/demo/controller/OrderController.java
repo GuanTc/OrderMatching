@@ -1,16 +1,12 @@
 package com.demo.controller;
 
-import com.demo.common.OrderVo;
 import com.demo.common.ResultMap;
 import com.demo.orders.pojo.Orders;
 import com.demo.service.OrderService;
-import com.demo.service.UserService;
-import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -72,12 +68,13 @@ public class OrderController {
 
     @RequestMapping("/findAllUser")
     @ResponseBody
-    private ResultMap findAllUser(){
+    private Object findAllUser(){
       ResultMap map = new ResultMap();
-        try {
-            List<OrderVo> orderVos = orderService.findAllUser();
+
+      try {
+            String s = orderService.findAllUser();
             map.Success();
-            map.setData(orderVos);
+            map.setData(s);
         }catch (Exception e){
             map.Error();
         }
