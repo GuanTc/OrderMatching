@@ -41,4 +41,11 @@ public interface SellOrderBookService {
      * @return
      */
     List<SellOrderBook> findAll();
+
+    /**
+     * 查询最小价格
+     * @param stockId
+     * @return
+     */
+    SellOrderBook findMinPriceByStockId(Long stockId);
 }
