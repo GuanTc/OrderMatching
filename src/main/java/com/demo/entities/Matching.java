@@ -19,6 +19,9 @@ import java.util.List;
 
 @Component
 public class Matching {
+    private static long marketOrderEachSleep=10000L;
+    private static long otherOrderEachSleep=20000L;
+
 
     @Autowired
     private SellOrderBookMapper sellOrderBookMapper;
@@ -89,6 +92,11 @@ public class Matching {
                                         trade.setQty(tradeQty);
                                         trade.setTradeDate(new Date());
                                         tradeMapper.insert(trade);
+                                        try {
+                                            Thread.sleep(marketOrderEachSleep);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                     if(flag==0){
                                         marketOrder=null;
@@ -137,6 +145,11 @@ public class Matching {
                                         trade.setQty(tradeQty);
                                         trade.setTradeDate(new Date());
                                         tradeMapper.insert(trade);
+                                        try {
+                                            Thread.sleep(marketOrderEachSleep);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                     if(flag==0){
                                         marketOrder=null;
@@ -190,14 +203,14 @@ public class Matching {
                         trade.setQty(tradeQty);
                         trade.setTradeDate(new Date());
                         tradeMapper.insert(trade);
+                        try {
+                            Thread.sleep(otherOrderEachSleep);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }//price is same,do the matching end
             }//for stock end
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
