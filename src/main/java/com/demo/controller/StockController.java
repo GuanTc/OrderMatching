@@ -1,6 +1,7 @@
 package com.demo.controller;
 
 import com.demo.common.ResultMap;
+import com.demo.common.StockPrice;
 import com.demo.service.StockSercive;
 import com.demo.stock.pojo.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,4 +92,20 @@ public class StockController {
         }
         return map;
     }
+
+    @RequestMapping("/stockPrice")
+    @ResponseBody
+    public ResultMap stockPrice(){
+        ResultMap map = new ResultMap();
+        try {
+            List<StockPrice> list = stockSercive.stockPrice();
+            map.setData(list);
+            map.Success();
+        }catch (Exception e){
+            map.Error();
+        }
+        return map;
+    }
+
+
 }

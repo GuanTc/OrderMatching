@@ -3,10 +3,12 @@ package com.demo.schedul;
 import com.alibaba.fastjson.JSONObject;
 import com.demo.WebSocket.MyWebSocket;
 import com.demo.common.ResultMap;
+import com.demo.common.StockPrice;
 import com.demo.orders.pojo.Orders;
 import com.demo.service.BuyOrderBookService;
 import com.demo.service.OrderService;
 import com.demo.service.SellOrderBookService;
+import com.demo.service.StockSercive;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +38,8 @@ public class Schedul {
     private BuyOrderBookService buyOrderBookService;
     @Autowired
     private SellOrderBookService sellOrderBookService;
+    @Autowired
+    private StockSercive stockSercive;
 
     @Scheduled(cron = "0 0/1 * * * ?")
     public void start(){
@@ -67,6 +71,12 @@ public class Schedul {
 
 
         try {
+
+            List<StockPrice> stockPrices = stockSercive.stockPrice();
+            ResultMap resultMap = new ResultMap();
+            resultMap.setData(stockPrices);
+            resultMap.setMsg("SCP");
+            MyWebSocket.sendInfoJson(resultMap);
             if(!flag){
                 ResultMap map = new ResultMap();
                 map.Success();

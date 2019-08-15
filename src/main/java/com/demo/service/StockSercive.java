@@ -1,5 +1,6 @@
 package com.demo.service;
 
+import com.demo.common.StockPrice;
 import com.demo.stock.pojo.Stock;
 
 import java.util.List;
@@ -29,4 +30,10 @@ public interface StockSercive {
      * @return
      */
     List<Stock> findStockByConditions(Stock stock);
+
+    /**
+     * 查询所有股票的现价
+     * @return
+     */
+    List<StockPrice> stockPrice();
 }
