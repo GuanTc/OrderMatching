@@ -85,7 +85,7 @@ public class MyWebSocket {
      * @param o
      * @throws IOException
      */
-     public void sendMessagetoJson(Object o) throws IOException {
+     public  void sendMessagetoJson(Object o) throws IOException {
        String message = JSONObject.toJSONString(o);
         this.session.getBasicRemote().sendText(message);
     }
@@ -96,6 +96,18 @@ public class MyWebSocket {
         for (MyWebSocket item : webSocketSet) {
             try {
                 item.sendMessage(message);
+            } catch (IOException e) {
+                continue;
+            }
+        }
+    }
+    /**
+     * 群发自定义消息
+     * */
+    public static void sendInfoJson(Object o) throws IOException {
+        for (MyWebSocket item : webSocketSet) {
+            try {
+                item.sendMessagetoJson(o);
             } catch (IOException e) {
                 continue;
             }

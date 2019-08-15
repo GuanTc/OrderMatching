@@ -65,11 +65,11 @@ public class Schedul {
            ResultMap map = new ResultMap();
            map.Success();
            map.setData(buyOrderBookService.findAll());
-           String buymsg = JSONObject.toJSONString(map);
-           MyWebSocket.sendInfo(buymsg);
+       //    String buymsg = JSONObject.toJSONString(map);
+           MyWebSocket.sendInfoJson(map);
            map.setData(sellOrderBookService.findAll());
            String selmsg = JSONObject.toJSONString(map);
-           MyWebSocket.sendInfo(selmsg);
+           MyWebSocket.sendInfoJson(map);
 
        }catch (Exception e){
 
