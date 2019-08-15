@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Component
 public class Schedul {
-    private  static final SimpleDateFormat dataFromat = new SimpleDateFormat("HH:mm:ss");
+    private  static final SimpleDateFormat dataFromat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     //秒（0-59）， 分，小时（0-23） 日期天/日（1-31） ，日期月份（1-12） 星期（1-7）年（1970-2099可以省略）
     private static final Logger logger = LoggerFactory.getLogger(Schedul.class);
    @Autowired
@@ -38,14 +38,14 @@ public class Schedul {
 
     @Scheduled(cron = "0 0/1 * * * ?")
     public void start(){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
          Date currentDate = new Date();
 
         List<Orders> orders = orderService.findOrdersByStatis();
         for(int i = 0; i < orders.size(); i++){
             Orders o = orders.get(i);
             logger.info("现在时间：{}",dataFromat.format(new Date())+"        order的截止日期是："+o.getGtdDate());
-               if(currentDate.before(o.getGtdDate())){
+               if(currentDate.after(o.getGtdDate())){
                    logger.info("修改状态");
                    o.setStatus(4);
                    orderService.updateOrder(o);
@@ -58,17 +58,19 @@ public class Schedul {
            }
 
         }
-        String s = format.format(new Date());
+        String s = dataFromat.format(new Date());
 
 
        try {
            ResultMap map = new ResultMap();
            map.Success();
            map.setData(buyOrderBookService.findAll());
+           map.setMsg("Buy");
        //    String buymsg = JSONObject.toJSONString(map);
            MyWebSocket.sendInfoJson(map);
            map.setData(sellOrderBookService.findAll());
            String selmsg = JSONObject.toJSONString(map);
+           map.setMsg("Sell");
            MyWebSocket.sendInfoJson(map);
 
        }catch (Exception e){
