@@ -4,6 +4,8 @@ import com.demo.BuyOrderBook.mapper.BuyOrderBookMapper;
 import com.demo.BuyOrderBook.pojo.BuyOrderBook;
 import com.demo.SellOrderBook.mapper.SellOrderBookMapper;
 import com.demo.SellOrderBook.pojo.SellOrderBook;
+import com.demo.WebSocket.MyWebSocket;
+import com.demo.common.ResultMap;
 import com.demo.orders.mapper.OrdersMapper;
 import com.demo.orders.pojo.Orders;
 import com.demo.orders.pojo.OrdersExample;
@@ -82,9 +84,26 @@ public class OrderServiceImpl implements OrderService{
             sellOrderBookMapper.insert(sellOrderBook);
         }
       }
-        Price price = new Price();
-        price.setStockId(orders.getStockId());
-        price.setBuyCurrentPrice(buyOrderBookMapper.selectMaxCurrentPrice(orders.getStockId()).getBuyPrice());
+
+//        Price price = new Price();
+//        price.setStockId(orders.getStockId());
+//        price.setBuyCurrentPrice(buyOrderBookMapper.selectMaxCurrentPrice(orders.getStockId()).getBuyPrice());
+        try {
+            ResultMap map = new ResultMap();
+            map.Success();
+            map.setData(buyOrderBookMapper.findAll());
+            map.setMsg("Buy");
+            //    String buymsg = JSONObject.toJSONString(map);
+            MyWebSocket.sendInfoJson(map);
+            map.setData(sellOrderBookMapper.findAll());
+            //  String selmsg = JSONObject.toJSONString(map);
+            map.setMsg("Sell");
+            MyWebSocket.sendInfoJson(map);
+        }catch (Exception e){
+
+        }
+        
+
         System.out.println("插入以后的OrderId: "+orders.getOrderId());
     }
 
