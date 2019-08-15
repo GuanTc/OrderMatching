@@ -10,6 +10,7 @@ import com.demo.orders.mapper.OrdersMapper;
 import com.demo.orders.pojo.Orders;
 import com.demo.orders.pojo.OrdersExample;
 import com.demo.price.mapper.PriceMapper;
+import com.demo.price.pojo.Price;
 import com.demo.service.OrderService;
 import com.demo.stock.mapper.StockMapper;
 import com.demo.user.mapper.UserMapper;
@@ -52,11 +53,11 @@ public class OrderServiceImpl implements OrderService{
         if("Day".equals(orders.getDuration())){
                // orders.setGtdDate(getDayTime());
             Date date = getDayTime();
-            date = addDayOfDate(date,20);
+            date = addDayOfDate(date,10);
             orders.setGtdDate(date);
         }else if("GTC".equals(orders.getDuration())){
                 Date date = getDayTime();
-                date = addDayOfDate(date,15);
+                date = addDayOfDate(date,20);
                 orders.setGtdDate(date);
         }
         orders.setStatus(1);
