@@ -53,11 +53,11 @@ public class OrderServiceImpl implements OrderService{
         if("Day".equals(orders.getDuration())){
                // orders.setGtdDate(getDayTime());
             Date date = getDayTime();
-            date = addDayOfDate(date,10);
+            date = addDayOfDate(date,2);
             orders.setGtdDate(date);
         }else if("GTC".equals(orders.getDuration())){
                 Date date = getDayTime();
-                date = addDayOfDate(date,5);
+                date = addDayOfDate(date,2);
                 orders.setGtdDate(date);
         }
         orders.setStatus(1);
@@ -102,7 +102,7 @@ public class OrderServiceImpl implements OrderService{
         }catch (Exception e){
 
         }
-        
+
 
         System.out.println("插入以后的OrderId: "+orders.getOrderId());
     }

@@ -30,7 +30,7 @@ public class OrderController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public ResultMap AddOrder( @RequestBody  Orders orders){
+    public ResultMap AddOrder(   Orders orders){
         ResultMap map = new ResultMap();
         try {
             orderService.addOrder(orders);

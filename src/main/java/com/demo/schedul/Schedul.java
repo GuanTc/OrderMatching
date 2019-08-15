@@ -27,6 +27,7 @@ import java.util.List;
 @Component
 public class Schedul {
     private  static final SimpleDateFormat dataFromat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private  static volatile boolean flag = true;
     //秒（0-59）， 分，小时（0-23） 日期天/日（1-31） ，日期月份（1-12） 星期（1-7）年（1970-2099可以省略）
     private static final Logger logger = LoggerFactory.getLogger(Schedul.class);
    @Autowired
@@ -48,8 +49,9 @@ public class Schedul {
                if(currentDate.after(o.getGtdDate())){
                    logger.info("修改状态");
                   if(o.getStatus()==1){
+                      flag = false;
                       o.setStatus(4);
-                  }
+
                    orderService.updateOrder(o);
                    if("S".equals(o.getType())){
                        sellOrderBookService.deleteSellOrderBook(o.getOrderId());
@@ -57,6 +59,7 @@ public class Schedul {
                    if("B".equals(orders.get(i))){
                        buyOrderBookService.deleteBuyOrder(o.getOrderId());
                    }
+                  }
            }
 
         }
@@ -64,16 +67,19 @@ public class Schedul {
 
 
        try {
-           ResultMap map = new ResultMap();
-           map.Success();
-           map.setData(buyOrderBookService.findAll());
-           map.setMsg("Buy");
-       //    String buymsg = JSONObject.toJSONString(map);
-           MyWebSocket.sendInfoJson(map);
-           map.setData(sellOrderBookService.findAll());
-         //  String selmsg = JSONObject.toJSONString(map);
-           map.setMsg("Sell");
-           MyWebSocket.sendInfoJson(map);
+           if(!flag){
+               ResultMap map = new ResultMap();
+               map.Success();
+               map.setData(buyOrderBookService.findAll());
+               map.setMsg("Buy");
+               //    String buymsg = JSONObject.toJSONString(map);
+               MyWebSocket.sendInfoJson(map);
+               map.setData(sellOrderBookService.findAll());
+               //  String selmsg = JSONObject.toJSONString(map);
+               map.setMsg("Sell");
+               MyWebSocket.sendInfoJson(map);
+           }
+
 
        }catch (Exception e){
 
