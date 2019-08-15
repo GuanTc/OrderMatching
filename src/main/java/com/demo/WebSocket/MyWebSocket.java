@@ -1,5 +1,6 @@
 package com.demo.WebSocket;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.OnClose;
@@ -79,7 +80,15 @@ public class MyWebSocket {
      this.session.getBasicRemote().sendText(message);
      }
 
-
+    /**
+     * 将对象转化为json类型的字符串并发送
+     * @param o
+     * @throws IOException
+     */
+     public void sendMessagetoJson(Object o) throws IOException {
+       String message = JSONObject.toJSONString(o);
+        this.session.getBasicRemote().sendText(message);
+    }
      /**
       * 群发自定义消息
       * */

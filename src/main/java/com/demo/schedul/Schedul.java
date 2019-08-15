@@ -1,5 +1,6 @@
 package com.demo.schedul;
 
+import com.alibaba.fastjson.JSONObject;
 import com.demo.WebSocket.MyWebSocket;
 import com.demo.common.ResultMap;
 import com.demo.orders.pojo.Orders;
@@ -10,7 +11,7 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
+
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -58,15 +59,18 @@ public class Schedul {
 
         }
         String s = format.format(new Date());
-        JSONObject jsonObject = new JSONObject();
+
+
        try {
-           jsonObject.put("status", "SUCCESS");
-           jsonObject.put("data",sellOrderBookService.findAll());
-           jsonObject.put("msg","Sell");
-           MyWebSocket.sendInfo(jsonObject.toString());
-           jsonObject.put("msg","Buy");
-           jsonObject.put("data",buyOrderBookService.findAll());
-           MyWebSocket.sendInfo(jsonObject.toString());
+           ResultMap map = new ResultMap();
+           map.Success();
+           map.setData(buyOrderBookService.findAll());
+           String buymsg = JSONObject.toJSONString(map);
+           MyWebSocket.sendInfo(buymsg);
+           map.setData(sellOrderBookService.findAll());
+           String selmsg = JSONObject.toJSONString(map);
+           MyWebSocket.sendInfo(selmsg);
+
        }catch (Exception e){
 
        }

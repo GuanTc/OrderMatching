@@ -75,7 +75,7 @@ public class OrderController {
       try {
             JSONObject s = orderService.findAllUser();
             map.Success();
-            map.setData(s);
+            map.setData(s.toString());
         }catch (Exception e){
             map.Error();
         }

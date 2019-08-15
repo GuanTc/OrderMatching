@@ -66,10 +66,10 @@ public class StockController {
            List<Stock> list = stockSercive.findAll();
            JSONObject jsonObject =new JSONObject();
            for(int i=0;i<list.size();i++){
-               jsonObject.put(list.get(i).getStockCode(),list.get(i).getStockName());
+               jsonObject.put(list.get(i).getStockId()+"",list.get(i).getStockName());
            }
            map.Success();
-           map.setData(jsonObject);
+           map.setData(jsonObject.toString());
        }catch (Exception e){
            map.Error();
        }
