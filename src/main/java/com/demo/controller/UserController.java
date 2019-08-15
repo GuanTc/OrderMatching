@@ -71,7 +71,7 @@ public class UserController {
      */
     @RequestMapping("/login")
     @ResponseBody
-    public ResultMap login(@RequestBody User user){
+    public ResultMap login(User user){
         user = userService.login(user);
         ResultMap map = new ResultMap();
         if(user == null){

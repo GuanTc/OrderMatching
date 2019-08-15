@@ -38,7 +38,7 @@ public class OrderController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public ResultMap AddOrder(Orders orders){
+    public ResultMap AddOrder(@RequestBody Orders orders){
         ResultMap map = new ResultMap();
         try {
             if("S".equals(orders.getType())){
