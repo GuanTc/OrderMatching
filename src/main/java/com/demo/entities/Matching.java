@@ -4,6 +4,8 @@ import com.demo.BuyOrderBook.mapper.BuyOrderBookMapper;
 import com.demo.BuyOrderBook.pojo.BuyOrderBook;
 import com.demo.SellOrderBook.mapper.SellOrderBookMapper;
 import com.demo.SellOrderBook.pojo.SellOrderBook;
+import com.demo.WebSocket.MyWebSocket;
+import com.demo.common.ResultMap;
 import com.demo.orders.mapper.OrdersMapper;
 import com.demo.orders.pojo.Orders;
 import com.demo.stock.mapper.StockMapper;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -63,6 +66,17 @@ public class Matching {
                                         System.out.println("Buy and Sell is the same person");
                                     }else{
                                         //the orders matching
+                                        //send matching sell first line
+                                        ResultMap map = new ResultMap();
+                                        map.Success();
+                                        map.setData(sob);
+                                        map.setMsg("right");
+                                        try {
+                                            MyWebSocket.sendInfoJson(map);
+                                            Thread.sleep(10000);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
                                         int tradeQty = 0;
                                         if (buyOrder.getRemainQty() < sellOrder.getRemainQty()) {
                                             tradeQty = buyOrder.getRemainQty();
@@ -92,9 +106,12 @@ public class Matching {
                                         trade.setQty(tradeQty);
                                         trade.setTradeDate(new Date());
                                         tradeMapper.insert(trade);
+                                        map.setData(sellOrderBookMapper.findAll());
+                                        map.setMsg("Sell");
                                         try {
+                                            MyWebSocket.sendInfoJson(map);
                                             Thread.sleep(marketOrderEachSleep);
-                                        } catch (InterruptedException e) {
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
@@ -116,6 +133,17 @@ public class Matching {
                                         System.out.println("Buy and Sell is the same person");
                                     }else{
                                         //the orders matching
+                                        //send matching buy first line
+                                        ResultMap map = new ResultMap();
+                                        map.Success();
+                                        map.setData(bob);
+                                        map.setMsg("left");
+                                        try {
+                                            MyWebSocket.sendInfoJson(map);
+                                            Thread.sleep(10000);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
                                         int tradeQty = 0;
                                         if (buyOrder.getRemainQty() < sellOrder.getRemainQty()) {
                                             tradeQty = buyOrder.getRemainQty();
@@ -145,6 +173,14 @@ public class Matching {
                                         trade.setQty(tradeQty);
                                         trade.setTradeDate(new Date());
                                         tradeMapper.insert(trade);
+                                        map.setData(buyOrderBookMapper.findAll());
+                                        map.setMsg("Buy");
+                                        try {
+                                            MyWebSocket.sendInfoJson(map);
+                                            Thread.sleep(marketOrderEachSleep);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
                                         try {
                                             Thread.sleep(marketOrderEachSleep);
                                         } catch (InterruptedException e) {
@@ -173,6 +209,20 @@ public class Matching {
                         System.out.println("Buy and Sell is the same person");
                     }else {
                         //the orders matching
+                        //send matching buy first line
+                        ResultMap map = new ResultMap();
+                        map.Success();
+                        map.setData(bob);
+                        map.setMsg("left");
+                        try {
+                            MyWebSocket.sendInfoJson(map);
+                            map.setData(sob);
+                            map.setMsg("right");
+                            MyWebSocket.sendInfoJson(map);
+                            Thread.sleep(10000);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         int tradeQty = 0;
                         if (buyOrder.getRemainQty() < sellOrder.getRemainQty()) {
                             tradeQty = buyOrder.getRemainQty();
@@ -203,9 +253,15 @@ public class Matching {
                         trade.setQty(tradeQty);
                         trade.setTradeDate(new Date());
                         tradeMapper.insert(trade);
+                        map.setData(sellOrderBookMapper.findAll());
+                        map.setMsg("Sell");
                         try {
+                            MyWebSocket.sendInfoJson(map);
+                            map.setData(buyOrderBookMapper.findAll());
+                            map.setMsg("Buy");
+                            MyWebSocket.sendInfoJson(map);
                             Thread.sleep(otherOrderEachSleep);
-                        } catch (InterruptedException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
