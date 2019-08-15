@@ -19,10 +19,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class DemoApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext context =SpringApplication.run(DemoApplication.class, args);
-//        Matching matching=context.getBean(Matching.class);
-//        MonitorOrders monitorOrders=context.getBean(MonitorOrders.class);
-//        matching.match();
-//        monitorOrders.monitor();
+        Matching matching=context.getBean(Matching.class);
+        MonitorOrders monitorOrders=context.getBean(MonitorOrders.class);
+        matching.match();
+        monitorOrders.monitor();
     }
 
 }
