@@ -39,4 +39,6 @@ public interface BuyOrderBookService {
      * @param Bob
      */
     void deleteBuyOrder(Long Bob);
+
+    BuyOrderBook findMaxPriceByStockId(Long stockId);
 }

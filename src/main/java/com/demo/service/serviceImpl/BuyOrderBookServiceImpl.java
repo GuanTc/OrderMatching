@@ -56,4 +56,9 @@ public class BuyOrderBookServiceImpl implements BuyOrderBookService{
         criteria.andOrderIdEqualTo(Bob);
         buyOrderBookMapper.deleteByExample(example);
     }
+
+    @Override
+    public BuyOrderBook findMaxPriceByStockId(Long stockId) {
+        return buyOrderBookMapper.selectMaxCurrentPrice(stockId);
+    }
 }

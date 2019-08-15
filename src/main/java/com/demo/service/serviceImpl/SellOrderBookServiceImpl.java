@@ -51,4 +51,9 @@ public class SellOrderBookServiceImpl implements SellOrderBookService {
     public List<SellOrderBook> findAll() {
         return sellOrderBookMapper.findAll();
     }
+
+    @Override
+    public SellOrderBook findMinPriceByStockId(Long stockId) {
+        return sellOrderBookMapper.selectMinCurrentPrice(stockId);
+    }
 }

@@ -1,8 +1,12 @@
 package com.demo.controller;
 
+import com.demo.BuyOrderBook.pojo.BuyOrderBook;
+import com.demo.SellOrderBook.pojo.SellOrderBook;
 import com.demo.common.ResultMap;
 import com.demo.orders.pojo.Orders;
+import com.demo.service.BuyOrderBookService;
 import com.demo.service.OrderService;
+import com.demo.service.SellOrderBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -27,15 +31,58 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private SellOrderBookService sellOrderBookService;
+    @Autowired
+    private BuyOrderBookService buyOrderBookService;
 
     @RequestMapping("/add")
     @ResponseBody
-    public ResultMap AddOrder(@RequestBody Orders orders){
+    public ResultMap AddOrder(Orders orders){
         ResultMap map = new ResultMap();
         try {
+            if("S".equals(orders.getType())){
+                SellOrderBook sellOrderBook = sellOrderBookService.findMinPriceByStockId(orders.getStockId());
+              if(sellOrderBook !=null && sellOrderBook.getAskPrice()>0){
+                  if("LMT".equals(orders.getOrderType())){
+
+                      if(orders.getPrice() <= sellOrderBook.getAskPrice()){
+                          map.Error();
+                          map.setMsg("The Sell Limit Price should be higher the Sell current Price. The current Price is "+sellOrderBook.getAskPrice());
+                          return  map;
+                      }
+                  }
+                  if("STP".equals(orders.getOrderType())){
+                      if(orders.getPrice() >= sellOrderBook.getAskPrice()){
+                          map.Error();
+                          map.setMsg("The Sell Stop loss Price should be lower the Sell currenr Price. The current Price is "+sellOrderBook.getAskPrice());
+                          return map;
+                      }
+                  }
+              }
+
+            }else if("B".equals(orders.getType())){
+                BuyOrderBook buyOrderBook = buyOrderBookService.findMaxPriceByStockId(orders.getStockId());
+              if(buyOrderBook != null && buyOrderBook.getBuyPrice() > 0){
+                  if("LMT".equals(orders.getOrderType())){
+                      if(orders.getPrice() >= buyOrderBook.getBuyPrice()){
+                          map.Error();
+                          map.setMsg("The Buy Limit Price should be lower the Sell current Price. The current Price is "+ buyOrderBook.getBuyPrice());
+                          return  map;
+                      }
+                  }
+                  if("STP".equals(orders.getOrderType())){
+                      if(orders.getPrice() <= buyOrderBook.getBuyPrice()){
+                          map.Error();
+                          map.setMsg("The Buy Stop loss Price should be higher the Sell currenr Price. The current Price is"+buyOrderBook.getBuyPrice() );
+                          return map;
+                      }
+                  }
+              }
+            }
             orderService.addOrder(orders);
             map.Success();
-            map.setMsg("添加成功");
+            map.setMsg("Add Success");
 
         }catch (Exception e){
             map.Error();
