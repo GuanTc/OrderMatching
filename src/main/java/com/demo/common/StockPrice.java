@@ -10,6 +10,15 @@ public class StockPrice {
     private String stockCode;
     private float buy_price;
     private float sell_price;
+    private  Long stock_Id;
+
+    public Long getStock_Id() {
+        return stock_Id;
+    }
+
+    public void setStock_Id(Long stock_Id) {
+        this.stock_Id = stock_Id;
+    }
 
     public String getStockCode() {
         return stockCode;
