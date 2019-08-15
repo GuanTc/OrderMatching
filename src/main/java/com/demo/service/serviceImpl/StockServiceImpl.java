@@ -61,6 +61,7 @@ public class StockServiceImpl implements StockSercive {
             Stock stock = list.get(i);
             StockPrice stockPrice = new StockPrice();
             stockPrice.setStockName(stock.getStockName());
+            stockPrice.setStockCode(stock.getStockCode());
             SellOrderBook sellOrderBook = sellOrderBookMapper.selectMinCurrentPrice(stock.getStockId());
             if(sellOrderBook != null&&sellOrderBook.getAskPrice() != null){
                 stockPrice.setSell_price(sellOrderBook.getAskPrice());
