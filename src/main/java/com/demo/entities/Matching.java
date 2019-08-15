@@ -73,7 +73,7 @@ public class Matching {
                                         map.setMsg("right");
                                         try {
                                             MyWebSocket.sendInfoJson(map);
-                                            Thread.sleep(10000);
+                                            Thread.sleep(3000);
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
@@ -110,7 +110,6 @@ public class Matching {
                                         map.setMsg("Sell");
                                         try {
                                             MyWebSocket.sendInfoJson(map);
-                                            Thread.sleep(marketOrderEachSleep);
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
@@ -140,7 +139,7 @@ public class Matching {
                                         map.setMsg("left");
                                         try {
                                             MyWebSocket.sendInfoJson(map);
-                                            Thread.sleep(10000);
+                                            Thread.sleep(3000);
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
@@ -177,7 +176,6 @@ public class Matching {
                                         map.setMsg("Buy");
                                         try {
                                             MyWebSocket.sendInfoJson(map);
-                                            Thread.sleep(marketOrderEachSleep);
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
@@ -219,7 +217,7 @@ public class Matching {
                             map.setData(sob);
                             map.setMsg("right");
                             MyWebSocket.sendInfoJson(map);
-                            Thread.sleep(10000);
+                            Thread.sleep(3000);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -260,7 +258,6 @@ public class Matching {
                             map.setData(buyOrderBookMapper.findAll());
                             map.setMsg("Buy");
                             MyWebSocket.sendInfoJson(map);
-                            Thread.sleep(otherOrderEachSleep);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

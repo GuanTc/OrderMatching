@@ -56,7 +56,7 @@ public class Schedul {
                    if("S".equals(o.getType())){
                        sellOrderBookService.deleteSellOrderBook(o.getOrderId());
                    }
-                   if("B".equals(orders.get(i))){
+                   if("B".equals(o.getType())){
                        buyOrderBookService.deleteBuyOrder(o.getOrderId());
                    }
                   }

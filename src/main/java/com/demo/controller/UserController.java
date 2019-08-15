@@ -70,7 +70,8 @@ public class UserController {
     @RequestMapping("/login")
     @ResponseBody
     public ResultMap login(@RequestBody User user){
-        user = userService.login(user);
+        User u = new User();
+        u = userService.login(user);
         ResultMap map = new ResultMap();
         if(user == null){
             map.Error();
@@ -79,6 +80,7 @@ public class UserController {
         }else {
             map.Success();
             map.setMsg("登陆成功");
+            map.setData(u);
             return map;
         }
     }
