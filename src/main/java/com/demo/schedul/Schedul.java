@@ -47,7 +47,9 @@ public class Schedul {
             logger.info("现在时间：{}",dataFromat.format(new Date())+"        order的截止日期是："+o.getGtdDate());
                if(currentDate.after(o.getGtdDate())){
                    logger.info("修改状态");
-                   o.setStatus(4);
+                  if(o.getStatus()==1){
+                      o.setStatus(4);
+                  }
                    orderService.updateOrder(o);
                    if("S".equals(o.getType())){
                        sellOrderBookService.deleteSellOrderBook(o.getOrderId());
@@ -69,7 +71,7 @@ public class Schedul {
        //    String buymsg = JSONObject.toJSONString(map);
            MyWebSocket.sendInfoJson(map);
            map.setData(sellOrderBookService.findAll());
-           String selmsg = JSONObject.toJSONString(map);
+         //  String selmsg = JSONObject.toJSONString(map);
            map.setMsg("Sell");
            MyWebSocket.sendInfoJson(map);
 

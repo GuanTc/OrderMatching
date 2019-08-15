@@ -6,6 +6,7 @@ import com.demo.service.priceService;
 import com.demo.service.serviceImpl.PriceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,7 +27,7 @@ public class priceController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public ResultMap addPrice(Price price){
+    public ResultMap addPrice(@RequestBody  Price price){
         ResultMap map = new ResultMap();
        try{
            priceService.addPrice(price);
@@ -56,7 +57,7 @@ public class priceController {
 
     @RequestMapping("/findPriceByConditions")
     @ResponseBody
-    public ResultMap findPriceByConditions(Price price,String start,String end){
+    public ResultMap findPriceByConditions(@RequestBody Price price,@RequestBody String start,@RequestBody String end){
         ResultMap map = new ResultMap();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {

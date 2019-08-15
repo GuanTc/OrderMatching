@@ -6,7 +6,7 @@ import com.demo.service.UserService;
 import com.demo.user.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,7 +30,7 @@ public class UserController {
      */
     @RequestMapping("/register")
     @ResponseBody
-    public ResultMap register(User user){
+    public ResultMap register(@RequestBody  User user){
         ResultMap map = new ResultMap();
        try {
            userService.register(user);
@@ -69,7 +69,7 @@ public class UserController {
      */
     @RequestMapping("/login")
     @ResponseBody
-    public ResultMap login(User user){
+    public ResultMap login(@RequestBody User user){
         user = userService.login(user);
         ResultMap map = new ResultMap();
         if(user == null){
@@ -90,7 +90,7 @@ public class UserController {
      */
     @RequestMapping("/update")
     @ResponseBody
-    public ResultMap update(User user){
+    public ResultMap update(@RequestBody User user){
         ResultMap map = new ResultMap();
         try {
             System.out.println(user);

@@ -5,6 +5,7 @@ import com.demo.service.TradeService;
 import com.demo.trade.pojo.Trade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,7 +26,7 @@ public class TradeController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public ResultMap addTrade(Trade trade){
+    public ResultMap addTrade(@RequestBody Trade trade){
      ResultMap map = new ResultMap();
         try {
          tradeService.addTrade(trade);
@@ -54,7 +55,7 @@ public class TradeController {
     }
     @RequestMapping("/findTradesByCondition")
     @ResponseBody
-    public ResultMap findTradesByCondition(Trade trade, String start, String end){
+    public ResultMap findTradesByCondition(@RequestBody Trade trade,@RequestBody  String start,@RequestBody String end){
 
         ResultMap map = new ResultMap();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

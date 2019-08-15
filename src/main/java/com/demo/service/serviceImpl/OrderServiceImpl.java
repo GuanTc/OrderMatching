@@ -7,9 +7,12 @@ import com.demo.SellOrderBook.pojo.SellOrderBook;
 import com.demo.orders.mapper.OrdersMapper;
 import com.demo.orders.pojo.Orders;
 import com.demo.orders.pojo.OrdersExample;
+import com.demo.price.mapper.PriceMapper;
+import com.demo.price.pojo.Price;
 import com.demo.service.OrderService;
 import com.demo.stock.mapper.StockMapper;
 import com.demo.user.mapper.UserMapper;
+import com.demo.user.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -37,6 +40,9 @@ public class OrderServiceImpl implements OrderService{
     private BuyOrderBookMapper buyOrderBookMapper;
     @Autowired
     private SellOrderBookMapper sellOrderBookMapper;
+    @Autowired
+    private PriceMapper priceMapper;
+
 
     @Override
     @Transactional
@@ -76,6 +82,9 @@ public class OrderServiceImpl implements OrderService{
             sellOrderBookMapper.insert(sellOrderBook);
         }
       }
+        Price price = new Price();
+        price.setStockId(orders.getStockId());
+        price.setBuyCurrentPrice(buyOrderBookMapper.selectMaxCurrentPrice(orders.getStockId()).getBuyPrice());
         System.out.println("插入以后的OrderId: "+orders.getOrderId());
     }
 
@@ -165,12 +174,13 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public JSONObject findAllUser()  {
-       List<Orders> list = ordersMapper.findAll();
+
        JSONObject jsonObject = new JSONObject();
+       List<User> list1 = userMapper.finAll();
      try {
-         for(int i =0;i<list.size();i++){
-             String id = list.get(i).getUserId()+"";
-             String name= userMapper.selectByPrimaryKey(list.get(i).getUserId()).getName();
+         for(int i =0;i<list1.size();i++){
+             String id = list1.get(i).getUserId()+"";
+             String name=list1.get(i).getName();
              jsonObject.put(id,name);
          }
      }catch (Exception e){

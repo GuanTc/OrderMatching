@@ -6,6 +6,7 @@ import com.demo.stock.pojo.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,7 +25,7 @@ public class StockController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public ResultMap addStock(Stock stock){
+    public ResultMap addStock(@RequestBody  Stock stock){
       ResultMap map = new ResultMap();
         try {
             stockSercive.addStock(stock);
@@ -78,7 +79,7 @@ public class StockController {
 
     @RequestMapping("/search")
     @ResponseBody
-    public ResultMap findStockByContidions(Stock stock){
+    public ResultMap findStockByContidions(@RequestBody Stock stock){
         ResultMap map = new ResultMap();
         try {
             List<Stock> list = stockSercive.findStockByConditions(stock);
