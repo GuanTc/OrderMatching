@@ -10,11 +10,11 @@
 <head>
 </head>
 <body>
-<form id="register" action="${pageContext.request.contextPath }/user/update" method="post">
+<form id="register" action="${pageContext.request.contextPath }/user/register" method="post">
     <input type="text" placeholder="username" name="username" />
     <input type="text" placeholder="password" name="password" />
     <input type="text" placeholder="name" name="name" />
-    <button type="submit" value="register" name="register">register</button>
+    <button type="submit" value="add" name="add">add</button>
 </form>
 ffffff
 </body>

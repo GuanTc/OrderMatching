@@ -14,7 +14,7 @@ public interface UserService {
      * 注册
      * @param user
      */
-    int register(User user);
+    User register(User user);
 
     /**
      * 查找全部

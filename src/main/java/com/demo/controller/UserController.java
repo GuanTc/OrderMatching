@@ -30,17 +30,19 @@ public class UserController {
      */
     @RequestMapping("/register")
     @ResponseBody
-    public ResultMap register(@RequestBody  User user){
+    public ResultMap register( @RequestBody User user){
         ResultMap map = new ResultMap();
-       try {
-           userService.register(user);
-           map.Success();
-           map.setMsg("注册成功");
-       }catch (Exception e){
-           map.Error();
-           map.setMsg("网络异常");
-       }
-       return map;
+        try {
+            User u = userService.register(user);
+            System.out.println(u);
+            map.Success();
+            map.setData(u);
+            map.setMsg("注册成功");
+        }catch (Exception e){
+            map.Error();
+            map.setMsg("网络异常");
+        }
+        return map;
     }
 
     /**
@@ -52,9 +54,9 @@ public class UserController {
     private ResultMap findAll(){
         ResultMap map = new  ResultMap();
         try {
-             List<User> list = userService.findAll();
-             map.Success();
-             map.setData(list);
+            List<User> list = userService.findAll();
+            map.Success();
+            map.setData(list);
         }catch (Exception e){
             map.Error();
             map.setMsg("network anomaly");
@@ -70,8 +72,7 @@ public class UserController {
     @RequestMapping("/login")
     @ResponseBody
     public ResultMap login(@RequestBody User user){
-        User u = new User();
-        u = userService.login(user);
+        user = userService.login(user);
         ResultMap map = new ResultMap();
         if(user == null){
             map.Error();
@@ -80,7 +81,7 @@ public class UserController {
         }else {
             map.Success();
             map.setMsg("登陆成功");
-            map.setData(u);
+            map.setData(user);
             return map;
         }
     }
@@ -99,6 +100,7 @@ public class UserController {
             userService.update(user);
             map.Success();
             map.setMsg("修改成功");
+            map.setData(user);
             return  map;
         }catch (Exception e){
             map.Error();
@@ -108,7 +110,7 @@ public class UserController {
     }
     @RequestMapping("/toAdd")
     public  String toAdd(){
-        return "index";
+        return "add_user";
     }
 
 

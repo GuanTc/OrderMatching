@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public int register(User user) {
+    public User register(User user) {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
         if(user != null){
@@ -33,9 +33,10 @@ public class UserServiceImpl implements UserService {
         }
         List<User> users = userMapper.selectByExample(example);
         if(users == null || users.size()==0){
-            return  userMapper.insert(user);
+             userMapper.insert(user);
+             return user;
         }
-        return 0;
+        return null;
     }
 
     @Override

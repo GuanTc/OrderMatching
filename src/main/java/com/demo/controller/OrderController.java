@@ -30,7 +30,7 @@ public class OrderController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public ResultMap AddOrder(@RequestBody Orders orders){
+    public ResultMap AddOrder( @RequestBody  Orders orders){
         ResultMap map = new ResultMap();
         try {
             orderService.addOrder(orders);
@@ -70,9 +70,9 @@ public class OrderController {
     @RequestMapping("/findAllUser")
     @ResponseBody
     private Object findAllUser(){
-      ResultMap map = new ResultMap();
+        ResultMap map = new ResultMap();
 
-      try {
+        try {
             JSONObject s = orderService.findAllUser();
             map.Success();
             map.setData(s.toString());

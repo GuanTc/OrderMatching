@@ -98,7 +98,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.demo.user.pojo.User" >
+  <insert id="insert" parameterType="com.demo.user.pojo.User"  useGeneratedKeys="true" keyProperty="userId">
     insert into user (user_id, username, password, 
       name)
     values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
