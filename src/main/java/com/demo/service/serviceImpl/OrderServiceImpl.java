@@ -57,14 +57,16 @@ public class OrderServiceImpl implements OrderService{
         orders.setSubmitDate(new Date());
         System.out.println(orders.getSubmitDate()+":::::::::::::"+orders.getGtdDate());
         ordersMapper.insert(orders);
-        if("B".equals(orders.getType())){
-            BuyOrderBook buyOrderBook = new BuyOrderBook();
-            buyOrderBook.setStockId(orders.getStockId());
-            buyOrderBook.setOrderId(orders.getOrderId());
-            buyOrderBook.setBuyPrice(orders.getPrice());
-            buyOrderBook.setBuySize(orders.getRemainQty());
-            buyOrderBookMapper.insert(buyOrderBook);
-        }
+      if(!"MKT".equals(orders.getOrderType())) {
+          if("B".equals(orders.getType())){
+              BuyOrderBook buyOrderBook = new BuyOrderBook();
+              buyOrderBook.setStockId(orders.getStockId());
+              buyOrderBook.setOrderId(orders.getOrderId());
+              buyOrderBook.setBuyPrice(orders.getPrice());
+              buyOrderBook.setBuySize(orders.getRemainQty());
+              buyOrderBookMapper.insert(buyOrderBook);
+          }
+
         if("S".equals(orders.getType())){
             SellOrderBook sellOrderBook = new SellOrderBook();
             sellOrderBook.setOrderId(orders.getOrderId());
@@ -73,6 +75,7 @@ public class OrderServiceImpl implements OrderService{
             sellOrderBook.setAskSize(orders.getRemainQty());
             sellOrderBookMapper.insert(sellOrderBook);
         }
+      }
         System.out.println("插入以后的OrderId: "+orders.getOrderId());
     }
 
