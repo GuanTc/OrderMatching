@@ -7,8 +7,26 @@ package com.demo.common;
  */
 public class StockPrice {
     private String stockName;
+    private String stockCode;
     private float buy_price;
     private float sell_price;
+    private  Long stock_Id;
+
+    public Long getStock_Id() {
+        return stock_Id;
+    }
+
+    public void setStock_Id(Long stock_Id) {
+        this.stock_Id = stock_Id;
+    }
+
+    public String getStockCode() {
+        return stockCode;
+    }
+
+    public void setStockCode(String stockCode) {
+        this.stockCode = stockCode;
+    }
 
     public String getStockName() {
         return stockName;
