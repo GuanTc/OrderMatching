@@ -30,7 +30,7 @@ public class UserController {
      */
     @RequestMapping("/register")
     @ResponseBody
-    public ResultMap register( @RequestBody User user){
+    public ResultMap register(User user){
         ResultMap map = new ResultMap();
         try {
             User u = userService.register(user);

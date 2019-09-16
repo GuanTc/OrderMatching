@@ -44,14 +44,14 @@ public class OrderController {
             if("S".equals(orders.getType())){
                 SellOrderBook sellOrderBook = sellOrderBookService.findMinPriceByStockId(orders.getStockId());
               if(sellOrderBook !=null && sellOrderBook.getAskPrice()>0){
-                  if("LMT".equals(orders.getOrderType())){
-
-                      if(orders.getPrice() <= sellOrderBook.getAskPrice()){
-                          map.Error();
-                          map.setMsg("The Sell Limit Price should be higher the Sell current Price. The current Price is "+sellOrderBook.getAskPrice());
-                          return  map;
-                      }
-                  }
+//                  if("LMT".equals(orders.getOrderType())){
+//
+//                      if(orders.getPrice() <= sellOrderBook.getAskPrice()){
+//                          map.Error();
+//                          map.setMsg("The Sell Limit Price should be higher the Sell current Price. The current Price is "+sellOrderBook.getAskPrice());
+//                          return  map;
+//                      }
+//                  }
                   if("STP".equals(orders.getOrderType())){
                       if(orders.getPrice() >= sellOrderBook.getAskPrice()){
                           map.Error();
@@ -64,13 +64,13 @@ public class OrderController {
             }else if("B".equals(orders.getType())){
                 BuyOrderBook buyOrderBook = buyOrderBookService.findMaxPriceByStockId(orders.getStockId());
               if(buyOrderBook != null && buyOrderBook.getBuyPrice() > 0){
-                  if("LMT".equals(orders.getOrderType())){
-                      if(orders.getPrice() >= buyOrderBook.getBuyPrice()){
-                          map.Error();
-                          map.setMsg("The Buy Limit Price should be lower the Sell current Price. The current Price is "+ buyOrderBook.getBuyPrice());
-                          return  map;
-                      }
-                  }
+//                  if("LMT".equals(orders.getOrderType())){
+//                      if(orders.getPrice() >= buyOrderBook.getBuyPrice()){
+//                          map.Error();
+//                          map.setMsg("The Buy Limit Price should be lower the Sell current Price. The current Price is "+ buyOrderBook.getBuyPrice());
+//                          return  map;
+//                      }
+//                  }
                   if("STP".equals(orders.getOrderType())){
                       if(orders.getPrice() <= buyOrderBook.getBuyPrice()){
                           map.Error();

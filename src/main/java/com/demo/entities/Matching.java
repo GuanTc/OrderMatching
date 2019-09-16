@@ -73,7 +73,7 @@ public class Matching {
                                         map.setMsg("right");
                                         try {
                                             MyWebSocket.sendInfoJson(map);
-                                            Thread.sleep(3000);
+                                            Thread.sleep(6000);
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
@@ -139,7 +139,7 @@ public class Matching {
                                         map.setMsg("left");
                                         try {
                                             MyWebSocket.sendInfoJson(map);
-                                            Thread.sleep(3000);
+                                            Thread.sleep(6000);
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
@@ -217,7 +217,7 @@ public class Matching {
                             map.setData(sob);
                             map.setMsg("right");
                             MyWebSocket.sendInfoJson(map);
-                            Thread.sleep(3000);
+                            Thread.sleep(6000);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

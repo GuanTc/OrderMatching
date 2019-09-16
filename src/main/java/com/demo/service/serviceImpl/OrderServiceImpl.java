@@ -65,7 +65,7 @@ public class OrderServiceImpl implements OrderService{
         orders.setSubmitDate(new Date());
         System.out.println(orders.getSubmitDate()+":::::::::::::"+orders.getGtdDate());
         ordersMapper.insert(orders);
-      if(!"MKT".equals(orders.getOrderType())) {
+      if("LMT".equals(orders.getOrderType())||"STP".equals(orders.getOrderType())) {
           if("B".equals(orders.getType())){
               BuyOrderBook buyOrderBook = new BuyOrderBook();
               buyOrderBook.setStockId(orders.getStockId());
